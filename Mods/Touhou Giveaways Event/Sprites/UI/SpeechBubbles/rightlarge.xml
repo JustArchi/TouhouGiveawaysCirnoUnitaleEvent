@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<spritesheet type="single">
+<sprite name="rightlarge">
+    <border x="20" y="5" z="7" w="9"/>
+</sprite>
+</spritesheet>

@@ -1,0 +1,80 @@
+Initialize engine version: 5.2.2f1 (3757309da7e7)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 1080 Ti (ID=0x1b06)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\MoonSharp.Interpreter.dll (this message is harmless)
+Loading D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\MoonSharp.Interpreter.dll into Unity Child Domain
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.031 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 144Hz; virtual: 1920x1080 at 0,0
+<RI> Initialized touch support.
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\System.dll (this message is harmless)
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 2394 -> priority: 1 
+  Thread -> id: 960 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 10.210241 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 271.
+Total: 0.153599 ms (FindLiveObjects: 0.012678 ms CreateObjectMapping: 0.014140 ms MarkObjects: 0.123123 ms  DeleteObjects: 0.003413 ms)
+
+Selecting directory Touhou Giveaways Event
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.132842 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 271.
+Total: 0.372296 ms (FindLiveObjects: 0.042422 ms CreateObjectMapping: 0.035108 ms MarkObjects: 0.288426 ms  DeleteObjects: 0.005607 ms)
+
+Loading Cirno
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.560517 ms
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\System.Xml.dll (this message is harmless)
+Platform assembly: D:\Download\UNITALE Alpha 0.2.1a for Windows\UNITALE_Alpha_0.2.1a_Data\Managed\Mono.Security.dll (this message is harmless)
+
+Unloading 161 unused Assets to reduce memory usage. Loaded Objects now: 1188.
+Total: 2.608514 ms (FindLiveObjects: 0.039253 ms CreateObjectMapping: 0.049980 ms MarkObjects: 2.490998 ms  DeleteObjects: 0.027794 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MoonSharp.Interpreter.Script.LoadString (System.String code, MoonSharp.Interpreter.Table globalTable, System.String codeFriendlyName) [0x00000] in <filename unknown>:0 
+  at MoonSharp.Interpreter.Script.DoString (System.String code, MoonSharp.Interpreter.Table globalContext) [0x00000] in <filename unknown>:0 
+  at LuaEnemyEncounter.prepareWave () [0x00000] in <filename unknown>:0 
+  at LuaEnemyEncounter.nextWave () [0x00000] in <filename unknown>:0 
+  at UIController.SwitchState (UIState state) [0x00000] in <filename unknown>:0 
+  at UIController.doNextMonsterDialogue () [0x00000] in <filename unknown>:0 
+  at UIController.HandleAction () [0x00000] in <filename unknown>:0 
+  at UIController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.783708 ms
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 1036.
+Total: 4.728923 ms (FindLiveObjects: 0.033158 ms CreateObjectMapping: 0.035839 ms MarkObjects: 4.595315 ms  DeleteObjects: 0.064365 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.725088 ms
+
+Unloading 22 unused Assets to reduce memory usage. Loaded Objects now: 1045.
+Total: 13.637712 ms (FindLiveObjects: 0.071679 ms CreateObjectMapping: 0.100205 ms MarkObjects: 13.366838 ms  DeleteObjects: 0.098255 ms)
+
