@@ -3,20 +3,6 @@ bullets = {}
 startTime = Time.time
 Encounter.SetVar("wavetimer", 17.0)
 
-function SpawnLazerA(posx)
-	local bullet = CreateProjectile('laser2', posx, 150)
-		bullet.SetVar('velx', -4)
-		bullet.SetVar('vely', 0)
-	table.insert(bullets, bullet)
-end
-function SpawnLazerB(posx)
-	local bullet = CreateProjectile('laser2', posx, -150)
-		bullet.SetVar('velx', 4)
-		bullet.SetVar('vely', 0)
-	table.insert(bullets, bullet)
-end
-
-
 function Update()
 	Arena.Resize(150, 320)
 	t = Time.time - startTime
@@ -24,24 +10,134 @@ function Update()
 		spawntimer = spawntimer + 1
 	end
 	if spawntimer == 40 then
-		for i=-67, -3, 16 do
-			SpawnLazerA(i)
-		end
-		for i= 67, 3, -16 do
-			SpawnLazerB(i)
-		end
+		local posy = 150
+		local posx = -67
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = -51
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = -35
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = -19
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = -3
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		
+		local posy = -150
+		local posx = 67
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = 51
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = 35
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = 19
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = 3
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
 		if (t >= 15) then
 			spawntimer = 0
 		end
 		
 	elseif spawntimer == 80 then
-		for i= 67, 3, -16 do
-			SpawnLazerB(i)
-		end
-		for i=-67, -3, 16 do
-			SpawnLazerA(i)
-		end
+	
+		local posy = 150
+		local posx = 67
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = 51
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = 35
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = 19
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = 150
+		local posx = 3
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', -4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
 		
+		local posy = -150
+		local posx = -67
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = -51
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = -35
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = -19
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
+		local posy = -150
+		local posx = -3
+		local bullet = CreateProjectile('laser2', posx, posy)
+        bullet.SetVar('vely', 4)
+        bullet.SetVar('velx', 0)
+		table.insert(bullets, bullet)
 		
 	end
 	for i=1,#bullets do
@@ -58,8 +154,8 @@ function Update()
 		end
 	end
 	if spawntimer == 80 then
-		spawntimer = 0
-	end
+    	spawntimer = 0
+    end
 end
 
 function OnHit(bullet)
