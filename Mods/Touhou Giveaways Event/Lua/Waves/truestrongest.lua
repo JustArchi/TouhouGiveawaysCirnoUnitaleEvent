@@ -4,6 +4,24 @@ startTime = Time.time
 Encounter.SetVar("wavetimer", 85.0)
 final = 0
 
+
+function SpawnLazer1(posy, posx=300)
+	local bullet = CreateProjectile('laser', posx, posy)
+	bullet.SetVar('velx', -12)
+	bullet.SetVar('vely', 0)
+	bullet.SetVar('damage', 3)
+	bullet.SetVar('type', 4)
+	table.insert(bullets, bullet)
+end
+function SpawnLazer2(posy, posx=300)
+	local bullet = CreateProjectile('laser', posx, posy)
+	bullet.SetVar('velx', 2)
+	bullet.SetVar('vely', 0)
+	bullet.SetVar('damage', 3)
+	bullet.SetVar('type', 6)
+	table.insert(bullets, bullet)
+end
+
 function Update()
 	Arena.Resize(600, 350)
 	t = Time.time - startTime
@@ -119,314 +137,13 @@ function Update()
 		end
 	elseif (t < 45) then
 		if spawntimer == 20 then
-
-			local posx = 300
-			local posy = -300
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -284
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -268
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -252
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -236
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -220
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -204
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -188
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -172
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -156
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -140
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -124
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -108
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -92
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -76
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -60
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -44
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -28
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = -12
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			
+			for i=-300, -12, 16 do   	
+				SpawnLazer1(i)
+			end
 		elseif spawntimer == 40 then
-		
-			local posx = 300
-			local posy = 300
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 284
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 268
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 252
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 236
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 220
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 204
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 188
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 172
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 156
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 140
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 124
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 108
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 92
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 76
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 60
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 44
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 28
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
-			local posx = 300
-			local posy = 12
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', -12)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 4)
-			table.insert(bullets, bullet)
+			for i=300, 12, -16 do   	
+				SpawnLazer1(i)
+			end
 			spawntimer = 0
 		end
 	elseif (t < 60) then
@@ -443,94 +160,10 @@ function Update()
 		end
 	elseif (t > 64 and t < 66) then
 		if final == 0 then
-			local posx = -300
-			local posy = -300
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -284
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -268
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -252
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -236
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -220
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -204
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -188
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -172
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -156
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
-			local posx = -300
-			local posy = -140
-			local bullet = CreateProjectile('laser', posx, posy)
-			bullet.SetVar('velx', 2)
-			bullet.SetVar('vely', 0)
-			bullet.SetVar('damage', 3)
-			bullet.SetVar('type', 6)
-			table.insert(bullets, bullet)
+			for i=-300, -140, 16 do   	
+				SpawnLazer1(i)
+			end
+			
 			final = 1
 		end
 	elseif (t > 77 and t < 79) then
