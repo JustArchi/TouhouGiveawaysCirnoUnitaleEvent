@@ -3,16 +3,16 @@ bullets = {}
 startTime = Time.time
 Encounter.SetVar("wavetimer", 17.0)
 
-function SpawnLazerA(posy, posx=190)
-	local bullet = CreateProjectile('laser', posx, posy)
-        bullet.SetVar('velx', -4)
-        bullet.SetVar('vely', 0)
+function SpawnLazerA(posy)
+	local bullet = CreateProjectile('laser', 190, posy)
+		bullet.SetVar('velx', -4)
+		bullet.SetVar('vely', 0)
 	table.insert(bullets, bullet)
 end
-function SpawnLazerB(posy, posx=190)
-	local bullet = CreateProjectile('laser', posx, posy)
-        bullet.SetVar('velx', 4)
-        bullet.SetVar('vely', 0)
+function SpawnLazerB(posy)
+	local bullet = CreateProjectile('laser', -190, posy)
+		bullet.SetVar('velx', 4)
+		bullet.SetVar('vely', 0)
 	table.insert(bullets, bullet)
 end
 
