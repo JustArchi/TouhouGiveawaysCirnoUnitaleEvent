@@ -21,15 +21,6 @@ function SpawnLazer2(posy, posx=300)
 	bullet.SetVar('type', 6)
 	table.insert(bullets, bullet)
 end
-function SpawnBlock(posy, posx=300)
-	local bullet = CreateProjectile('block2', posx, posy)
-	bullet.SetVar('velx', 0)
-	bullet.SetVar('vely', 10)
-	bullet.SetVar('creation', Time.time)
-	bullet.SetVar('damage', 3)
-	bullet.SetVar('type', 1)
-	table.insert(bullets, bullet)
-end
 
 function Update()
 	Arena.Resize(600, 350)
@@ -37,16 +28,78 @@ function Update()
 	spawntimer = spawntimer + 1
 	if (t < 8) then
 		if spawntimer == 100 then
-			SpawnBlock(Player.y - 300, Player.x)
-			SpawnBlock(Player.y - 150, Player.x - 150)
-			SpawnBlock(Player.y, Player.x - 300)
-			SpawnBlock(Player.y + 150, Player.x - 150)
-			SpawnBlock(Player.y + 300, Player.x)
-			SpawnBlock(Player.y + 150, Player.x + 150)
-			SpawnBlock(Player.y, Player.x + 300)
-			SpawnBlock(Player.y - 150, Player.x + 150)
-			SpawnBlock(Player.y - 150, Player.x + 150)
-			
+			local posx = Player.x
+			local posy = Player.y - 300
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', 0)
+			bullet.SetVar('vely', 10)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x - 150
+			local posy = Player.y - 150
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', 5)
+			bullet.SetVar('vely', 5)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x - 300
+			local posy = Player.y
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', 10)
+			bullet.SetVar('vely', 0)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x - 150
+			local posy = Player.y + 150
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', 5)
+			bullet.SetVar('vely', -5)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x
+			local posy = Player.y + 300
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', 0)
+			bullet.SetVar('vely', -10)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x + 150
+			local posy = Player.y + 150
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', -5)
+			bullet.SetVar('vely', -5)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x + 300
+			local posy = Player.y
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', -10)
+			bullet.SetVar('vely', 0)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
+			local posx = Player.x + 150
+			local posy = Player.y - 150
+			local bullet = CreateProjectile('block2', posx, posy)
+			bullet.SetVar('velx', -5)
+			bullet.SetVar('vely', 5)
+			bullet.SetVar('creation', Time.time)
+			bullet.SetVar('damage', 3)
+			bullet.SetVar('type', 1)
+			table.insert(bullets, bullet)
 			spawntimer = 0
 		end
 	elseif (t < 20) then
