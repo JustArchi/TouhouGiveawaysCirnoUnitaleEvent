@@ -18,14 +18,15 @@ enemypositions = {
 {0, 0}
 }
 
-dogsused = 0
-
 possible_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
 
 function EncounterStarting()
 	Player.name = "konrads6"
 	Player.lv = 1
 	Player.hp = 20
+	-- Inventory.AddCustomItems({"inventory/Snowman","inventory/BundleTrash"}, {0,3}) ??  --
+	Inventory.AddCustomItems({"Snowman", "BundleTrash"}, {0, 3})
+	Inventory.SetInventory({"Snowman", "BundleTrash"})
 	State("ENEMYDIALOGUE")
 	Audio.Stop()
 end
@@ -182,11 +183,12 @@ function HandleSpare()
 end
 
 function HandleItem(ItemID)
-	if dogsused < 7 then
-		BattleDialog({"You eat the dog.\nYou recover all your HP."})
-		Player.Heal(20)
-		dogsused = (dogsused + 1)
-	else
-		BattleDialog({"[noskip]You're not carrying enough dogs.[w:10][func:State,ACTIONSELECT]"})
+	if ItemID == "SNOWMAN" then  --TODO find the other sprites for snowman so I can have it get smaller and smaller
+		Player.Heal(15)
+		BattleDialog("You take a bite out of the snowman[w:2]")
+		currentdialogue = {"[voice:cirno][func:SetSprite,cirno/surprised]You...[w:2][func:SetSprite,cirno/confused]You ate...\n[w:3]You ate my friend!\n[func:SetSprite,cirno/annoyed]"})
+	elseif ItemID == "BUNDLETRASH" then
+		BattleDialog({"You offer Cirno some bundle trash you've been hoarding\n[func:SetSprite,cirno/confused][w:3]She ignores it"})
 	end
+	
 end
