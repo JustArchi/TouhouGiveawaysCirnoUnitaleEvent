@@ -2,11 +2,17 @@ spawntimer = 0
 bullets = {}
 startTime = Time.time
 Encounter.SetVar("wavetimer", 28.0)
+ended = false
 
 function Update()
 	t = Time.time - startTime
 	if (t >= 24) then
-		State("ENEMYDIALOGUE")
+		if (ended == false) then
+			ended = true
+			State("ENEMYDIALOGUE")
+		end
+
+		return
 	end
 	if (t < 20) then
 		spawntimer = spawntimer + 1

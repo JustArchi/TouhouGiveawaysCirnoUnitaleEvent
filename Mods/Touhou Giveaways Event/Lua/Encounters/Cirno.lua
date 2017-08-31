@@ -47,7 +47,10 @@ function EnemyDialogueStarting()
 		"[noskip][voice:cirno][func:SetSprite,cirno/surprised]Wait, you're still\nalive ?!",
 		"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Oh, i see...\nI'm supposed to target\nthis box thing...",
 		"[noskip][voice:cirno]...what a weird game.",
-		"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm...\n[func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN !"})
+		"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm...\n[func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN !",
+		"[func:State,ACTIONSELECT]"
+		})
+		SetGlobal("COUNTER", GetGlobal("COUNTER") + 1)
 	elseif GetGlobal("COUNTER") == 4 then
 		enemies[1].SetVar('currentdialogue', {
 		"[noskip][voice:cirno][func:SetSprite,cirno/wink]1st letter is X"
@@ -136,10 +139,9 @@ function EnemyDialogueEnding()
 	elseif GetGlobal("FINAL") == true then
 	nextwaves = {"truestrongest"}
     elseif GetGlobal("COUNTER") == 0 then
-	enemies[1].SetVar('comments', {"placeholder"})
+	enemies[1].SetVar('comments', {"A wild Cirno appears !"})
 	nextwaves = {"strongest"}
 	elseif GetGlobal("COUNTER") == 1 then
-	enemies[1].SetVar('comments', {"A wild Cirno appears !"})
 	nextwaves = {"nothing"}
 	elseif GetGlobal("COUNTER") == 2 then
 	nextwaves = {"icicle1"}
