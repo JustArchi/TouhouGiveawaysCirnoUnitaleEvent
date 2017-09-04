@@ -27,7 +27,8 @@ SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
 available_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
-available_items = {"Snowman", "Snowman2", "Snowman3", "BundleTrash", "MusicBox", "CheckReqs"}
+available_items = {"Snowman", "BundleTrash", "MusicBox", "CheckReqs"}
+available_items_types = {0, 3, 3, 3 }
 available_songs = {"cirno", "megalovania", "one"}
 
 current_pitch = 1
@@ -35,13 +36,14 @@ current_song = music
 
 Counter = 0
 custom_attack = 0
+snowman_hp = 3
 
 function EncounterStarting()
 	DEBUG("EncounterStarting()")
 	Player.name = "konrads6"
 	Player.lv = 3
 	Player.hp = 28
-	Inventory.AddCustomItems(available_items, {0, 0, 0, 3, 3, 3})
+	Inventory.AddCustomItems(available_items, available_items_types)
 	Inventory.SetInventory(available_items)
 	SetPPCollision(true)
 	Audio.Stop()
@@ -77,7 +79,7 @@ function EnemyDialogueStarting()
 			"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Oh, i see... I'm supposed to target this box thing...",
 			"[noskip][voice:cirno]...what a weird game.",
 			"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm... [func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN!",
-			"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bump counter!
+			"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bump Counter!
 		})
 		Counter = Counter + 1
 	elseif Counter == 2 then
@@ -170,7 +172,7 @@ function EnemyDialogueEnding()
 	if (custom_attack == 1) then
 		nextwaves = {"trashu"}
 		custom_attack = 0
-		return -- Don't increment counter!
+		return -- Don't increment Counter!
 	elseif GetGlobal("DUNKED") == true then
 		nextwaves = {"dunk"}
 	elseif GetGlobal("SPARE") == true then
@@ -248,25 +250,23 @@ end
 
 function HandleItem(ItemID)
 	if ItemID == "SNOWMAN" then
-		Inventory.NoDelete = true
-		Player.Heal(15)
-		BattleDialog("You take a bite out of the snowman[w:2]")
-		enemies[1].SetVar('currentdialogue', {
-		"[voice:cirno][func:SetSprite,cirno/surprised]You... [w:2][func:SetSprite,cirno/confused]You ate..."
-		,"[w:3]You ate my friend! [func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
-		Inventory.SetItem(1, "Snowman2")
-	elseif ItemID == "SNOWMAN2" then
-		Inventory.NoDelete = true
-		Player.Heal(13)
-		BattleDialog("You take another bite out of the snowman[w:2]")
-		enemies[1].SetVar('currentdialogue', {
-		"[voice:cirno][func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
-		Inventory.SetItem(1, "Snowman3")
-	elseif ItemID == "SNOWMAN3" then
-		Player.Heal(11)
-		BattleDialog("You stuff the last of the snowman into your mouth[w:2]")
-		enemies[1].SetVar('currentdialogue', {
-		"[voice:cirno][func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
+		if (snowman_hp >= 3) then
+			BattleDialog("You take a bite out of the snowman.[w:15]\nYou recovered 15 HP.")
+			Player.Heal(15)
+			Inventory.NoDelete = true
+		elseif (snowman_hp == 2) then
+			BattleDialog("You take another bite out of the snowman.[w:15]\nYou recovered 13 HP.")
+			Player.Heal(13)
+			Inventory.NoDelete = true
+		elseif (snowman_hp == 1) then
+			BattleDialog("You stuff the last of the snowman into your mouth.[w:15]\nYou recovered 11 HP.")
+			Player.Heal(11)
+		else
+			-- Should never happen
+			BattleDialog("The snowman has melted.")
+		end
+
+		snowman_hp = snowman_hp - 1;
 	elseif ItemID == "BUNDLETRASH" then
 		BattleDialog("[noskip]You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
 		custom_attack = 1
