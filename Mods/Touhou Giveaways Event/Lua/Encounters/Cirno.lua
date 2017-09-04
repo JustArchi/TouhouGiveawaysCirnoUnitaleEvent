@@ -37,14 +37,15 @@ function EncounterStarting()
 	Player.hp = 20
 	Inventory.AddCustomItems({"Snowman", "BundleTrash"}, {0, 3})
 	Inventory.SetInventory({"Snowman", "BundleTrash"})
-	State("ENEMYDIALOGUE")
+	SetPPCollision(true)
 	Audio.Stop()
+	--State("DEFENDING")
+	State("ENEMYDIALOGUE")
 end
 
 function EnemyDialogueStarting()
 	DEBUG("EnemyDialogueStarting() Counter: " .. Counter)
 	if Counter == 0 then
-		-- This is starting point
 		enemies[1].SetVar('currentdialogue', {
 			"[noskip][voice:cirno]SteamGifts users.",
 			"[noskip][voice:cirno][func:SetSprite,cirno/proud]I heard that some of you were SO smart the last time we did this.",
@@ -66,7 +67,7 @@ function EnemyDialogueStarting()
 			"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Oh, i see... I'm supposed to target this box thing...",
 			"[noskip][voice:cirno]...what a weird game.",
 			"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm... [func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN!",
-			"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bu
+			"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bump counter!
 		})
 		Counter = Counter + 1
 	elseif Counter == 2 then
@@ -115,8 +116,6 @@ function EnemyDialogueStarting()
 		SetGlobal("TURN", 15)
 		SetGlobal("SPARE", true)
 	end
-
-	-- We're moving to EnemyDialogueEnding()
 end
 
 function EnemyDialogueEnding()
@@ -198,7 +197,6 @@ function EnemyDialogueEnding()
 	end
 
 	Counter = Counter + 1
-	-- We're moving to nextwaves here!
 end
 
 function DefenseEnding()
