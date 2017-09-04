@@ -39,7 +39,7 @@ fightCount = 0
 insult = false
 
 function HandleAttack(attackstatus)
-    if attackstatus == -1 then
+	if attackstatus == -1 then
 		if GetGlobal("SPARE") == true then
 			currentdialogue = {"[voice:cirno][func:SetSprite,cirno/wink]Hey, what are you\nwaiting for ?"}
 		elseif GetGlobal("TURN") >= 7 then
