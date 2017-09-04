@@ -106,20 +106,16 @@ function HandleAttack(attackstatus)
 	end
 end
 
-function StartMusic()
-	Audio.Play()
-end
-
 function StopMusic()
 	Audio.Stop()
 end
 
-function LoadMusic(filename)
-	Audio.LoadFile(filename)
-end
-
 function PauseMusic()
 	Audio.Pause()
+end
+
+function UnpauseMusic()
+	Audio.Unpause()
 end
 
 function HandleCustomCommand(command)
@@ -223,7 +219,7 @@ function HandleCustomCommand(command)
 				currentdialogue = {"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful][func:PauseMusic]...", 
 				"[noskip][voice:cirno].[w:4].[w:4].",
 				"[noskip][voice:cirno].[w:10].[w:10].",
-				"[noskip][voice:cirno][func:SetSprite,cirno/base][func:StartMusic]...i don't get it."}
+				"[noskip][voice:cirno][func:SetSprite,cirno/base][func:UnpauseMusic]...i don't get it."}
 			elseif GetGlobal("TURN") == 3 then
 				BattleDialog({"You ask Cirno the secret of her\npower."})
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]Hum ?[w:10]\n[func:SetSprite,cirno/happy]Oh, but it's simple!",

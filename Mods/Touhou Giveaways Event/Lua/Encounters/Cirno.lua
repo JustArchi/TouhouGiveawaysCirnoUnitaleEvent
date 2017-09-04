@@ -26,7 +26,11 @@ SetGlobal("SPARE", false)
 SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
-possible_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
+available_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
+available_songs = {"cirno", "megalovania", "one"}
+
+current_pitch = 1
+current_song = music
 
 Counter = 0
 
@@ -35,11 +39,11 @@ function EncounterStarting()
 	Player.name = "konrads6"
 	Player.lv = 1
 	Player.hp = 20
-	Inventory.AddCustomItems({"Snowman", "BundleTrash"}, {0, 3})
-	Inventory.SetInventory({"Snowman", "BundleTrash"})
+	Inventory.AddCustomItems({"Snowman", "BundleTrash", "MusicBox"}, {0, 3, 3})
+	Inventory.SetInventory({"Snowman", "BundleTrash", "MusicBox"})
 	SetPPCollision(true)
 	Audio.Stop()
-	--State("DEFENDING")
+	--State("ACTIONSELECT")
 	State("ENEMYDIALOGUE")
 end
 
@@ -54,7 +58,7 @@ function EnemyDialogueStarting()
 			"[noskip][voice:cirno]Because EYE!",
 			"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic][w:45][next]",
 			"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Wait a second, this doesn't sound right...[w:90][next]",
-			"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][func:StopMusic][w:30][next]",
+			"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][w:30][next]",
 			"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic]",
 			"[noskip][voice:cirno]The strongest of ALL the fairies!",
 			"[noskip][voice:cirno][color:ff0000]WILL DEFEAT YOU HERE AND NOW![color:000000]",
@@ -193,7 +197,7 @@ function EnemyDialogueEnding()
 	elseif Counter == 13 then
 		nextwaves = {"block4"}
 	else
-		nextwaves = { possible_attacks[math.random(#possible_attacks)] }
+		nextwaves = { available_attacks[math.random(#available_attacks)] }
 	end
 
 	Counter = Counter + 1
@@ -207,6 +211,23 @@ function HandleSpare()
 	State("ENEMYDIALOGUE")
 end
 
+function UpdateMusicPitch()
+	Audio.Pitch(current_pitch)
+end
+
+function UpdateMusicFile()
+	Audio.LoadFile(current_song)
+	StopMusic()
+end
+
+function StopMusic()
+	Audio.Stop()
+end
+
+function StartMusic()
+	Audio.Play()
+end
+
 function HandleItem(ItemID)
 	if ItemID == "SNOWMAN" then  --TODO find the other sprites for snowman so I can have it get smaller and smaller
 		Player.Heal(15)
@@ -215,6 +236,30 @@ function HandleItem(ItemID)
 		"[voice:cirno][func:SetSprite,cirno/surprised]You... [w:2][func:SetSprite,cirno/confused]You ate... [w:3]You ate my friend! [func:SetSprite,cirno/annoyed]"})
 	elseif ItemID == "BUNDLETRASH" then
 		BattleDialog("You offer Cirno some bundle trash you've been hoarding [func:SetSprite,cirno/confused][w:3]She ignores it")
+	elseif ItemID == "MUSICBOX" then
+		local diceRoll = math.random(6)
+		local pitch = math.random() - 0.5
+		if (diceRoll == 1 or diceRoll == 2) then
+			if (diceRoll == 1) then
+				current_pitch = current_pitch - pitch
+			else
+				current_pitch = current_pitch + pitch
+			end
+
+			StopMusic()
+			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
+		else
+			local random_song = current_song
+
+			while (random_song == current_song) do
+				random_song = available_songs[math.random(#available_songs)]
+			end
+
+			current_song = random_song;
+
+			UpdateMusicFile()
+			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
+		end
 	end
 
 end
