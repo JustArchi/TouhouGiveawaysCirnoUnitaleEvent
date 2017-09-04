@@ -51,7 +51,6 @@ end
 
 function EnemyDialogueStarting()
 	DEBUG("EnemyDialogueStarting() Counter: " .. Counter)
-	Counter = 2
 	if Counter == 0 then
 		enemies[1].SetVar('currentdialogue', {
 			"[noskip][voice:cirno]SteamGifts users.",
