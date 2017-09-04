@@ -27,6 +27,7 @@ SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
 available_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
+available_items = {"Snowman", "BundleTrash", "MusicBox", "CheckReqs"}
 available_songs = {"cirno", "megalovania", "one"}
 
 current_pitch = 1
@@ -37,10 +38,10 @@ Counter = 0
 function EncounterStarting()
 	DEBUG("EncounterStarting()")
 	Player.name = "konrads6"
-	Player.lv = 1
-	Player.hp = 20
-	Inventory.AddCustomItems({"Snowman", "BundleTrash", "MusicBox"}, {0, 3, 3})
-	Inventory.SetInventory({"Snowman", "BundleTrash", "MusicBox"})
+	Player.lv = 3
+	Player.hp = 28
+	Inventory.AddCustomItems(available_items, {0, 3, 3, 3})
+	Inventory.SetInventory(available_items)
 	SetPPCollision(true)
 	Audio.Stop()
 	--State("ACTIONSELECT")
@@ -215,17 +216,25 @@ function UpdateMusicPitch()
 	Audio.Pitch(current_pitch)
 end
 
-function UpdateMusicFile()
-	Audio.LoadFile(current_song)
+function LoadMusic(filename)
+	Audio.LoadFile(filename)
 	StopMusic()
+end
+
+function PauseMusic()
+	Audio.Pause()
+end
+
+function StartMusic()
+	Audio.Play()
 end
 
 function StopMusic()
 	Audio.Stop()
 end
 
-function StartMusic()
-	Audio.Play()
+function UnpauseMusic()
+	Audio.Unpause()
 end
 
 function HandleItem(ItemID)
@@ -256,10 +265,12 @@ function HandleItem(ItemID)
 			end
 
 			current_song = random_song;
+			LoadMusic(current_song)
 
-			UpdateMusicFile()
 			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
 		end
+	elseif (ItemID == "CHECKREQS") then
+		BattleDialog("[noskip]Checking... Please wait![w:90]\nRequirements check failed.\nSorry, rules are secret ;)")
 	end
 
 end

@@ -106,12 +106,21 @@ function HandleAttack(attackstatus)
 	end
 end
 
-function StopMusic()
-	Audio.Stop()
+function LoadMusic(filename)
+	Audio.LoadFile(filename)
+	StopMusic()
 end
 
 function PauseMusic()
 	Audio.Pause()
+end
+
+function StartMusic()
+	Audio.Play()
+end
+
+function StopMusic()
+	Audio.Stop()
 end
 
 function UnpauseMusic()
