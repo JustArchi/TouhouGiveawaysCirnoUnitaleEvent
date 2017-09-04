@@ -26,25 +26,25 @@ SetGlobal("SPARE", false)
 SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
-available_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
-available_items = {"Snowman", "BundleTrash", "MusicBox", "CheckReqs"}
-available_items_types = {0, 3, 3, 3 }
-available_songs = {"cirno", "megalovania", "one"}
+AvailableAttacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
+AvailableItems = {"Snowman", "BundleTrash", "MusicBox", "CheckReqs"}
+AvailableItemTypes = {0, 3, 3, 3 }
+AvailableSongs = {"cirno", "megalovania", "one"}
 
-current_pitch = 1
-current_song = music
+CurrentPitch = 1
+CurrentSong = music
 
 Counter = 0
-custom_attack = 0
-snowman_hp = 3
+CustomAttack = 0
+SnowmanHP = 3
 
 function EncounterStarting()
 	DEBUG("EncounterStarting()")
 	Player.name = "konrads6"
 	Player.lv = 3
 	Player.hp = 28
-	Inventory.AddCustomItems(available_items, available_items_types)
-	Inventory.SetInventory(available_items)
+	Inventory.AddCustomItems(AvailableItems, AvailableItemTypes)
+	Inventory.SetInventory(AvailableItems)
 	SetPPCollision(true)
 	Audio.Stop()
 	--State("ACTIONSELECT")
@@ -53,7 +53,7 @@ end
 
 function EnemyDialogueStarting()
 	DEBUG("EnemyDialogueStarting() Counter: " .. Counter)
-	if (custom_attack == 1) then
+	if (CustomAttack == 1) then
 		enemies[1].SetVar('currentdialogue', {
 		"[voice:cirno][func:SetSprite,cirno/annoyed]I'll show you where you can put this!"
 	})
@@ -169,9 +169,9 @@ function EnemyDialogueEnding()
 		enemies[1].SetVar("def", 999999999)
 	end
 
-	if (custom_attack == 1) then
+	if (CustomAttack == 1) then
 		nextwaves = {"trashu"}
-		custom_attack = 0
+		CustomAttack = 0
 		return -- Don't increment Counter!
 	elseif GetGlobal("DUNKED") == true then
 		nextwaves = {"dunk"}
@@ -209,7 +209,7 @@ function EnemyDialogueEnding()
 	elseif Counter == 13 then
 		nextwaves = {"block4"}
 	else
-		nextwaves = { available_attacks[math.random(#available_attacks)] }
+		nextwaves = { AvailableAttacks[math.random(#AvailableAttacks)] }
 	end
 
 	Counter = Counter + 1
@@ -224,7 +224,7 @@ function HandleSpare()
 end
 
 function UpdateMusicPitch()
-	Audio.Pitch(current_pitch)
+	Audio.Pitch(CurrentPitch)
 end
 
 function LoadMusic(filename)
@@ -250,15 +250,15 @@ end
 
 function HandleItem(ItemID)
 	if ItemID == "SNOWMAN" then
-		if (snowman_hp >= 3) then
+		if (SnowmanHP >= 3) then
 			BattleDialog("You take a bite out of the snowman.[w:15]\nYou recovered 15 HP.")
 			Player.Heal(15)
 			Inventory.NoDelete = true
-		elseif (snowman_hp == 2) then
+		elseif (SnowmanHP == 2) then
 			BattleDialog("You take another bite out of the snowman.[w:15]\nYou recovered 13 HP.")
 			Player.Heal(13)
 			Inventory.NoDelete = true
-		elseif (snowman_hp == 1) then
+		elseif (SnowmanHP == 1) then
 			BattleDialog("You stuff the last of the snowman into your mouth.[w:15]\nYou recovered 11 HP.")
 			Player.Heal(11)
 		else
@@ -266,31 +266,31 @@ function HandleItem(ItemID)
 			BattleDialog("The snowman has melted.")
 		end
 
-		snowman_hp = snowman_hp - 1;
+		SnowmanHP = SnowmanHP - 1;
 	elseif ItemID == "BUNDLETRASH" then
 		BattleDialog("[noskip]You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
-		custom_attack = 1
+		CustomAttack = 1
 	elseif ItemID == "MUSICBOX" then
 		local diceRoll = math.random(6)
 		local pitch = math.random() - 0.5
 		if (diceRoll == 1 or diceRoll == 2) then
 			if (diceRoll == 1) then
-				current_pitch = current_pitch - pitch
+				CurrentPitch = CurrentPitch - pitch
 			else
-				current_pitch = current_pitch + pitch
+				CurrentPitch = CurrentPitch + pitch
 			end
 
 			StopMusic()
 			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
 		else
-			local random_song = current_song
+			local random_song = CurrentSong
 
-			while (random_song == current_song) do
-				random_song = available_songs[math.random(#available_songs)]
+			while (random_song == CurrentSong) do
+				random_song = AvailableSongs[math.random(#AvailableSongs)]
 			end
 
-			current_song = random_song;
-			LoadMusic(current_song)
+			CurrentSong = random_song;
+			LoadMusic(CurrentSong)
 
 			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
 		end

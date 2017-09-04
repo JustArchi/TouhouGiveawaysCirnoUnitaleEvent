@@ -34,9 +34,8 @@ unkillable = true
 --font = nil
 --voice = nil
 
-shotdown = 0
-fightCount = 0
-insult = false
+FightCount = 0
+Insult = false
 
 function HandleAttack(attackstatus)
 	if attackstatus == -1 then
@@ -90,11 +89,11 @@ function HandleAttack(attackstatus)
 			"[voice:cirno][func:SetSprite,cirno/wink]And your knife is\nbroken."}
 		elseif GetGlobal("INSULT") == 0 then
 			SetSprite('cirno/surprised')
-			if fightCount >= 99 then
+			if FightCount >= 99 then
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful]...you're really, REALLY\ndetermined, uh ?",
 				"[voice:cirno][func:SetSprite,cirno/proud]But you know, the\ntruth is...\n[func:SetSprite,cirno/wink]Your knife won't really\nhurt me.\nLike, not at all.",
 				"[voice:cirno][func:SetSprite,cirno/thoughtful]So, if you're trying\nto kill me...[w:10]\n[func:SetSprite,cirno/wink]Well, you probably\nwon't succeed\nanytime soon."}
-			elseif fightCount > 0 then
+			elseif FightCount > 0 then
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful]You know...[w:10]\n[func:SetSprite,cirno/wink]You'll definitely break\nyour knife at this rate."}
 			else
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]Eeeh ? What are you\ndoing with that knife ?"}
@@ -102,7 +101,7 @@ function HandleAttack(attackstatus)
 		else
 			currentdialogue = {"[voice:cirno]Tss...\nDo you really think a\nKNIFE can do a scratch\nto ME ?\nThink again, weakling."}
 		end
-		fightCount = (fightCount + 1)
+		FightCount = (FightCount + 1)
 	end
 end
 
@@ -136,7 +135,7 @@ function HandleCustomCommand(command)
 			elseif GetGlobal("TURN") >= 7 then
 				BattleDialog({"CIRNO 9 ATK 9 DEF\n[func:SetSprite,cirno/annoyed]She must be really bored to\nplay with you like that..."})
 				currentdialogue = {"[voice:cirno]OH, YOU, SHUT UP![w:10]\nWhat are you even\nuseful for anyway ?"}
-			elseif fightCount > 0 then
+			elseif FightCount > 0 then
 				BattleDialog({"CIRNO 9 ATK 9 DEF\n[func:SetSprite,cirno/proud]Her ice body renders her\ninvulnerable to attack. Somehow."})
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/happy]That's because eye'm\nthe strongest!"}
 			else
@@ -170,7 +169,7 @@ function HandleCustomCommand(command)
 			end
 		end
     elseif command == "INSULT" then
-		if insult == true then
+		if Insult == true then
 			BattleDialog({"You were about to insult Cirno\nagain, but you realized it was\na bad idea."})
 		elseif GetGlobal("TURN") >= 7 then
 			BattleDialog({"You insult Cirno.\nBut she's too busy FIGHTing to\npay attention."})
@@ -219,7 +218,7 @@ function HandleCustomCommand(command)
 			"[voice:cirno][func:SetSprite,cirno/wink]...okay, you have a\nweird sense of humor,\nbut i forgive you.",
 			"[voice:cirno][func:SetSprite,cirno/base]This time."}
 			SetGlobal("INSULT", 0)
-			insult = true
+			Insult = true
 		end
 	elseif command == "QUESTION" then
 		if GetGlobal("INSULT") == 0 then
