@@ -27,6 +27,8 @@ function Update()
 		bullet.SetVar('velx', 2.5 - 5 * math.random(0))
 		bullet.SetVar('vely', 0)
 		table.insert(bullets, bullet)
+
+		spawntimer = 0
 	end
 
 	for i=#bullets,1,-1 do
@@ -43,10 +45,6 @@ function Update()
 			bullet.MoveTo(newposx, newposy)
 			bullet.SetVar('vely', vely)
 		end
-	end
-
-	if (spawntimer == 4) then
-		spawntimer = 0
 	end
 end
 

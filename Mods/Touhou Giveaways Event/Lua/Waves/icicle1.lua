@@ -16,6 +16,8 @@ function Update()
 		bullet.SetVar('velx', 1 - 2 * math.random())
 		bullet.SetVar('vely', 0)
 		table.insert(bullets, bullet)
+
+		spawntimer = 0
 	end
 
 	for i=#bullets,1,-1 do
@@ -33,12 +35,8 @@ function Update()
 			bullet.SetVar('vely', vely)
 		end
 	end
-
-	if spawntimer == 6 then
-		spawntimer = 0
-	end
 end
 
 function OnHit(bullet)
-	Player.Hurt(2*(GetGlobal("INSULT")+1))
+	Player.Hurt(2 * (GetGlobal("INSULT") + 1))
 end

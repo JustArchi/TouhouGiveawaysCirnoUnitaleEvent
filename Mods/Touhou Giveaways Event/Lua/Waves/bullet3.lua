@@ -8,24 +8,29 @@ function Update()
 	if (t < 25) then
 		spawntimer = spawntimer + 1
 	end
-    if spawntimer == 6 then
-        local posx = 310
-        local posy = math.random(Arena.height, -Arena.height)
-        local bullet = CreateProjectile('bullet', posx, posy)
+
+	if spawntimer == 6 then
+		local posx = 310
+		local posy = math.random(Arena.height, -Arena.height)
+		local bullet = CreateProjectile('bullet', posx, posy)
 		bullet.SetVar('vely', 0.5 - math.random())
-        table.insert(bullets, bullet)
+		table.insert(bullets, bullet)
+
+		spawntimer = 0
 	end
-    
-    for i=1,#bullets do
-        local bullet = bullets[i]
-		local vely = bullet.GetVar('vely')
-        bullet.MoveTo(bullet.x - 3, bullet.y + vely)
-    end
-    if spawntimer == 6 then
-    	spawntimer = 0
-    end
+
+	for i=#bullets,1,-1 do
+		local bullet = bullets[i]
+		if (bullet.x < -Arena.width * 2 or bullet.x > Arena.width * 2) or (bullet.y < -Arena.height * 2.5 or bullet.y > Arena.height * 2.5) then
+			bullet.Remove()
+			table.remove(bullets, i)
+		else
+			local vely = bullet.GetVar('vely')
+			bullet.MoveTo(bullet.x - 3, bullet.y + vely)
+		end
+	end
 end
 
 function OnHit(bullet)
-	Player.Hurt(2*(GetGlobal("INSULT")+1))
+	Player.Hurt(2 * (GetGlobal("INSULT") + 1))
 end

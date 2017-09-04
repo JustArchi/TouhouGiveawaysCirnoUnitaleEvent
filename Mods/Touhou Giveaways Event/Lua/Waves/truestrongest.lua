@@ -2,10 +2,10 @@ spawntimer = 0
 bullets = {}
 startTime = Time.time
 Encounter.SetVar("wavetimer", 85.0)
+Arena.Resize(600, 350)
 final = 0
 
 function Update()
-	Arena.Resize(600, 350)
 	t = Time.time - startTime
 	spawntimer = spawntimer + 1
 	if (t < 8) then
@@ -19,6 +19,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x - 150
 			local posy = Player.y - 150
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -28,6 +29,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x - 300
 			local posy = Player.y
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -37,6 +39,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x - 150
 			local posy = Player.y + 150
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -46,6 +49,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x
 			local posy = Player.y + 300
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -55,6 +59,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x + 150
 			local posy = Player.y + 150
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -64,6 +69,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x + 300
 			local posy = Player.y
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -73,6 +79,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			local posx = Player.x + 150
 			local posy = Player.y - 150
 			local bullet = CreateProjectile('block2', posx, posy)
@@ -82,6 +89,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 1)
 			table.insert(bullets, bullet)
+
 			spawntimer = 0
 		end
 	elseif (t < 20) then
@@ -94,6 +102,7 @@ function Update()
 			bullet.SetVar('damage', 2)
 			bullet.SetVar('type', 2)
 			table.insert(bullets, bullet)
+
 			spawntimer = 0
 		end
 	elseif (t < 35) then
@@ -115,11 +124,11 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 3)
 			table.insert(bullets, bullet)
+
 			spawntimer = 0
 		end
 	elseif (t < 45) then
 		if spawntimer == 20 then
-
 			local posx = 300
 			local posy = -300
 			local bullet = CreateProjectile('laser', posx, posy)
@@ -128,6 +137,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 4)
 			table.insert(bullets, bullet)
+
 			local posx = 300
 			local posy = -284
 			local bullet = CreateProjectile('laser', posx, posy)
@@ -136,6 +146,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 4)
 			table.insert(bullets, bullet)
+
 			local posx = 300
 			local posy = -268
 			local bullet = CreateProjectile('laser', posx, posy)
@@ -144,6 +155,7 @@ function Update()
 			bullet.SetVar('damage', 3)
 			bullet.SetVar('type', 4)
 			table.insert(bullets, bullet)
+
 			local posx = 300
 			local posy = -252
 			local bullet = CreateProjectile('laser', posx, posy)
@@ -540,13 +552,18 @@ function Update()
 			final = 2
 		end
 	end
-	for i=1,#bullets do
+
+	for i=#bullets,1,-1 do
 		local bullet = bullets[i]
-		local velx = bullet.GetVar('velx')
-		local vely = bullet.GetVar('vely')
-		local newposx = bullet.x + velx
-		local newposy = bullet.y + vely
-		if bullet.isactive then
+		if bullet.x < -600 or bullet.x > 600 or bullet.y < -600 or bullet.y > 600 then
+			bullet.Remove()
+			table.remove(bullets, i)
+		else
+			local velx = bullet.GetVar('velx')
+			local vely = bullet.GetVar('vely')
+			local newposx = bullet.x + velx
+			local newposy = bullet.y + vely
+
 			if bullet.GetVar('type') == 1 then
 				if Time.time >= bullet.GetVar('creation') + 0.6 then
 					bullet.MoveTo(newposx, newposy)
@@ -557,9 +574,6 @@ function Update()
 				bullet.SetVar('vely', vely)
 			else
 				bullet.MoveTo(newposx, newposy)
-			end
-			if bullet.x <= -600 or bullet.x >= 600 or bullet.y <= -600 or bullet.y >= 600 then
-				 bullet.Remove()
 			end
 		end
 	end
