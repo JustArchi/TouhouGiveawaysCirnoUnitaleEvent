@@ -26,7 +26,12 @@ SetGlobal("SPARE", false)
 SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
-possible_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
+available_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
+available_items = {"Snowman", "Snowman2", "Snowman3", "BundleTrash", "MusicBox", "CheckReqs"}
+available_songs = {"cirno", "megalovania", "one"}
+
+current_pitch = 1
+current_song = music
 
 Counter = 0
 give_trash = true
@@ -34,13 +39,13 @@ give_trash = true
 function EncounterStarting()
 	DEBUG("EncounterStarting()")
 	Player.name = "konrads6"
-	Player.lv = 1
-	Player.hp = 20
-	Inventory.AddCustomItems({"Snowman", "Snowman2", "Snowman3", "BundleTrash"}, {0, 0, 0, 3})
-	Inventory.SetInventory({"Snowman", "BundleTrash"})
+	Player.lv = 3
+	Player.hp = 28
+	Inventory.AddCustomItems(available_items, {0, 0, 0, 3, 3, 3})
+	Inventory.SetInventory(available_items)
 	SetPPCollision(true)
 	Audio.Stop()
-	--State("DEFENDING")
+	--State("ACTIONSELECT")
 	State("ENEMYDIALOGUE")
 end
 
@@ -56,7 +61,7 @@ function EnemyDialogueStarting()
 			"[noskip][voice:cirno]Because EYE!",
 			"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic][w:45][next]",
 			"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Wait a second, this doesn't sound right...[w:90][next]",
-			"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][func:StopMusic][w:30][next]",
+			"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][w:30][next]",
 			"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic]",
 			"[noskip][voice:cirno]The strongest of ALL the fairies!",
 			"[noskip][voice:cirno][color:ff0000]WILL DEFEAT YOU HERE AND NOW![color:000000]",
@@ -199,7 +204,7 @@ function EnemyDialogueEnding()
 	elseif Counter == 13 then
 		nextwaves = {"block4"}
 	else
-		nextwaves = { possible_attacks[math.random(#possible_attacks-1)] }
+		nextwaves = { available_attacks[math.random(#available_attacks)] }
 	end
 
 	Counter = Counter + 1
@@ -211,6 +216,31 @@ end
 
 function HandleSpare()
 	State("ENEMYDIALOGUE")
+end
+
+function UpdateMusicPitch()
+	Audio.Pitch(current_pitch)
+end
+
+function LoadMusic(filename)
+	Audio.LoadFile(filename)
+	StopMusic()
+end
+
+function PauseMusic()
+	Audio.Pause()
+end
+
+function StartMusic()
+	Audio.Play()
+end
+
+function StopMusic()
+	Audio.Stop()
+end
+
+function UnpauseMusic()
+	Audio.Unpause()
 end
 
 function HandleItem(ItemID)
@@ -237,6 +267,32 @@ function HandleItem(ItemID)
 	elseif ItemID == "BUNDLETRASH" then
 		BattleDialog("[noskip][voice:cirno]You offer Cirno some bundle trash you've been hoarding[w:5]\nShe ignores it")
 		give_trash = true
+	elseif ItemID == "MUSICBOX" then
+		local diceRoll = math.random(6)
+		local pitch = math.random() - 0.5
+		if (diceRoll == 1 or diceRoll == 2) then
+			if (diceRoll == 1) then
+				current_pitch = current_pitch - pitch
+			else
+				current_pitch = current_pitch + pitch
+			end
+
+			StopMusic()
+			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
+		else
+			local random_song = current_song
+
+			while (random_song == current_song) do
+				random_song = available_songs[math.random(#available_songs)]
+			end
+
+			current_song = random_song;
+			LoadMusic(current_song)
+
+			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
+		end
+	elseif (ItemID == "CHECKREQS") then
+		BattleDialog("[noskip]Checking... Please wait![w:90]\nRequirements check failed.\nSorry, rules are secret ;)")
 	end
 
 end
