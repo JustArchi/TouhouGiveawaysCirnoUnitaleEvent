@@ -27,20 +27,21 @@ SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
 available_attacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
-available_items = {"Snowman", "BundleTrash", "MusicBox", "CheckReqs"}
+available_items = {"Snowman", "Snowman2", "Snowman3", "BundleTrash", "MusicBox", "CheckReqs"}
 available_songs = {"cirno", "megalovania", "one"}
 
 current_pitch = 1
 current_song = music
 
 Counter = 0
+give_trash = true
 
 function EncounterStarting()
 	DEBUG("EncounterStarting()")
 	Player.name = "konrads6"
 	Player.lv = 3
 	Player.hp = 28
-	Inventory.AddCustomItems(available_items, {0, 3, 3, 3})
+	Inventory.AddCustomItems(available_items, {0, 0, 0, 3, 3, 3})
 	Inventory.SetInventory(available_items)
 	SetPPCollision(true)
 	Audio.Stop()
@@ -50,6 +51,7 @@ end
 
 function EnemyDialogueStarting()
 	DEBUG("EnemyDialogueStarting() Counter: " .. Counter)
+	Counter = 2
 	if Counter == 0 then
 		enemies[1].SetVar('currentdialogue', {
 			"[noskip][voice:cirno]SteamGifts users.",
@@ -168,6 +170,10 @@ function EnemyDialogueEnding()
 		nextwaves = {"nothing"}
 	elseif GetGlobal("FINAL") == true then
 		nextwaves = {"truestrongest"}
+	elseif give_trash == true then
+		enemies[1].SetVar('currentdialogue', {"[voice:cirno][func:SetSprite,cirno/confused]???"})
+		nextwaves = {"trashu"}
+		give_trash = false
 	elseif Counter == 0 then
 		enemies[1].SetVar('comments', {"A wild Cirno appears!"})
 		nextwaves = {"strongest"}
@@ -238,13 +244,29 @@ function UnpauseMusic()
 end
 
 function HandleItem(ItemID)
-	if ItemID == "SNOWMAN" then  --TODO find the other sprites for snowman so I can have it get smaller and smaller
+	if ItemID == "SNOWMAN" then
+		Inventory.NoDelete = true
 		Player.Heal(15)
-		BattleDialog("You take a bite  out of the snowman[w:2]")
+		BattleDialog("You take a bite out of the snowman[w:2]")
 		enemies[1].SetVar('currentdialogue', {
-		"[voice:cirno][func:SetSprite,cirno/surprised]You... [w:2][func:SetSprite,cirno/confused]You ate... [w:3]You ate my friend! [func:SetSprite,cirno/annoyed]"})
+		"[voice:cirno][func:SetSprite,cirno/surprised]You... [w:2][func:SetSprite,cirno/confused]You ate..."
+		,"[w:3]You ate my friend! [func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
+		Inventory.SetItem(1, "Snowman2")
+	elseif ItemID == "SNOWMAN2" then
+		Inventory.NoDelete = true
+		Player.Heal(13)
+		BattleDialog("You take another bite out of the snowman[w:2]")
+		enemies[1].SetVar('currentdialogue', {
+		"[voice:cirno][func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
+		Inventory.SetItem(1, "Snowman3")
+	elseif ItemID == "SNOWMAN3" then
+		Player.Heal(11)
+		BattleDialog("You stuff the last of the snowman into your mouth[w:2]")
+		enemies[1].SetVar('currentdialogue', {
+		"[voice:cirno][func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
 	elseif ItemID == "BUNDLETRASH" then
-		BattleDialog("You offer Cirno some bundle trash you've been hoarding [func:SetSprite,cirno/confused][w:3]She ignores it")
+		BattleDialog("[noskip][voice:cirno]You offer Cirno some bundle trash you've been hoarding[w:5]\nShe ignores it")
+		give_trash = true
 	elseif ItemID == "MUSICBOX" then
 		local diceRoll = math.random(6)
 		local pitch = math.random() - 0.5
