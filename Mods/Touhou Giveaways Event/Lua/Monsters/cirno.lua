@@ -125,6 +125,10 @@ function StopMusic()
 	Audio.Stop()
 end
 
+function LoadMusic(filename)
+	Audio.LoadFile(filename)
+end
+
 function PauseMusic()
 	Audio.Pause()
 end

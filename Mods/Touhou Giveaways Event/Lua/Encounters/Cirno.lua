@@ -1,4 +1,4 @@
-music = "cirno"
+music = "megalovania"
 encountertext = "A wild Cirno appears!"
 nextwaves = {"strongest"}
 wavetimer = 6.0
@@ -46,6 +46,9 @@ function EnemyDialogueStarting()
 		"[noskip][voice:cirno][func:SetSprite,cirno/wink]Checking the HTML for the link to the gibs instead of fighting.",
 		"[noskip][voice:cirno][func:SetSprite,cirno/base]...but.[w:10] NO ONE IS SMARTER THAN ME!",
 		"[noskip][voice:cirno]Because EYE!",
+		"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic][w:45][next]",
+		"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Wait a second, this doesn't sound right...[w:90][next]",
+		"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][func:StopMusic][w:30][next]",
 		"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic]",
 		"[noskip][voice:cirno]The strongest of ALL the fairies!",
 		"[noskip][voice:cirno][color:ff0000]WILL DEFEAT YOU HERE AND NOW![color:000000]",
