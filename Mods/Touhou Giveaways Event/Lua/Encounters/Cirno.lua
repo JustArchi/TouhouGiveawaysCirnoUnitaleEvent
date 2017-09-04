@@ -47,8 +47,8 @@ function EncounterStarting()
 	Inventory.SetInventory(AvailableItems)
 	SetPPCollision(true)
 	Audio.Stop()
-	--State("ACTIONSELECT")
 	State("ENEMYDIALOGUE")
+	--State("ACTIONSELECT")
 end
 
 function EnteringState(newState, oldState)
@@ -225,6 +225,7 @@ function UpdateMusicPitch()
 end
 
 function LoadMusic(filename)
+	CurrentSong = filename;
 	Audio.LoadFile(filename)
 	StopMusic()
 end
@@ -271,28 +272,35 @@ function HandleItem(ItemID)
 		BattleDialog("[noskip]You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
 		CustomAttack = 1
 	elseif ItemID == "MUSIC BOX" then
-		local diceRoll = math.random(6)
-		local pitch = math.random() - 0.5
-		if (diceRoll == 1 or diceRoll == 2) then
-			if (diceRoll == 1) then
-				CurrentPitch = CurrentPitch - pitch
-			else
-				CurrentPitch = CurrentPitch + pitch
-			end
-
-			StopMusic()
-			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
+		if (CurrentSong == nil) then
+			BattleDialog("[noskip]You broke it for good, it's no use.")
 		else
-			local randomSong = CurrentSong
+			local diceRoll = math.random(7)
+			diceRoll = 7
+			local pitch = math.random() - 0.5
+			if (diceRoll == 1 or diceRoll == 2) then
+				if (diceRoll == 1) then
+					CurrentPitch = CurrentPitch - pitch
+				else
+					CurrentPitch = CurrentPitch + pitch
+				end
 
-			while (randomSong == CurrentSong) do
-				randomSong = AvailableSongs[math.random(#AvailableSongs)]
+				StopMusic()
+				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
+			elseif (diceRoll == 7) then
+				CurrentSong = nil
+				StopMusic()
+				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30] Congratulations! You broke it.")
+			else
+				local randomSong = CurrentSong
+
+				while (randomSong == CurrentSong) do
+					randomSong = AvailableSongs[math.random(#AvailableSongs)]
+				end
+
+				LoadMusic(randomSong)
+				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
 			end
-
-			CurrentSong = randomSong;
-			LoadMusic(randomSong)
-
-			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
 		end
 	elseif (ItemID == "CHECK REQS") then
 		BattleDialog("[noskip]Checking... Please wait![w:90]\nRequirements check failed.\nSorry, rules are secret ;)")
