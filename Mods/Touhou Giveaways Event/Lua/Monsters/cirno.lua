@@ -1,14 +1,5 @@
 comments = {
-	"Eye'm the strongest!",
-	"Cirno seems proud of herself.",
-	"Smells like ice.",
-	"Cirno.",
-	"9.",
-	"You'll get no sympathy from her. ...well, not for now.",
-	"The area is frozen now. That's her attack.",
-	"It's cold in there...",
-	"You can feel ice crawling on your back.",
-	"She seems to think it's a game."
+	"A wild Cirno appears!"
 }
 
 commands = {"Check", "Flatter", "Insult", "Flirt", "Joke", "Question"}
@@ -46,8 +37,6 @@ unkillable = true
 shotdown = 0
 fightCount = 0
 insult = false
-
-SetGlobal("COUNTER", 0)
 
 function HandleAttack(attackstatus)
     if attackstatus == -1 then
@@ -209,7 +198,7 @@ function HandleCustomCommand(command)
 			BattleDialog({"You try to flirt with Cirno, but\nit doesn't seem to work well."})
 			currentdialogue = {"[voice:cirno]What are you even\ntalking about ?"}
 		end
-    elseif command == "JOKE" then
+	elseif command == "JOKE" then
 		if GetGlobal("TURN") >= 7 then
 			BattleDialog({"You tell Cirno a joke extremely\neasy to get.\nShe get it."})
 			currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful]...wow, do all humans\nhave your sense of\nhumor ?",
