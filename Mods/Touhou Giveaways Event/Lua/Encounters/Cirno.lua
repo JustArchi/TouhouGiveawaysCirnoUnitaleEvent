@@ -27,8 +27,8 @@ SetGlobal("INSULT", 0)
 SetGlobal("TURN", 0)
 
 AvailableAttacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
-AvailableItems = {"Snowman", "BundleTrash", "MusicBox", "CheckReqs"}
-AvailableItemTypes = {0, 3, 3, 3 }
+AvailableItems = {"Snowman", "Pandora's box", "Bundle trash", "Music box", "Check Reqs"}
+AvailableItemTypes = {0, 0, 0, 3, 3}
 AvailableSongs = {"cirno", "megalovania", "one"}
 
 CurrentPitch = 1
@@ -267,7 +267,10 @@ function HandleItem(ItemID)
 		end
 
 		SnowmanHP = SnowmanHP - 1;
-	elseif ItemID == "BUNDLETRASH" then
+	elseif (ItemID == "PANDORA'S BOX") then
+		BattleDialog("[noskip]You opened Pandora's box[w:30]\nYour nickname is now <redacted>.")
+		Player.name = "redacted"
+	elseif ItemID == "BUNDLE TRASH" then
 		BattleDialog("[noskip]You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
 		CustomAttack = 1
 	elseif ItemID == "MUSICBOX" then
@@ -283,18 +286,18 @@ function HandleItem(ItemID)
 			StopMusic()
 			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
 		else
-			local random_song = CurrentSong
+			local randomSong = CurrentSong
 
-			while (random_song == CurrentSong) do
-				random_song = AvailableSongs[math.random(#AvailableSongs)]
+			while (randomSong == CurrentSong) do
+				randomSong = AvailableSongs[math.random(#AvailableSongs)]
 			end
 
-			CurrentSong = random_song;
-			LoadMusic(CurrentSong)
+			CurrentSong = randomSong;
+			LoadMusic(randomSong)
 
 			BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
 		end
-	elseif (ItemID == "CHECKREQS") then
+	elseif (ItemID == "CHECK REQS") then
 		BattleDialog("[noskip]Checking... Please wait![w:90]\nRequirements check failed.\nSorry, rules are secret ;)")
 	end
 
