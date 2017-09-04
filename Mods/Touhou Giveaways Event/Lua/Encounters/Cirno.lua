@@ -34,7 +34,7 @@ current_pitch = 1
 current_song = music
 
 Counter = 0
-give_trash = true
+custom_attack = 0
 
 function EncounterStarting()
 	DEBUG("EncounterStarting()")
@@ -51,7 +51,11 @@ end
 
 function EnemyDialogueStarting()
 	DEBUG("EnemyDialogueStarting() Counter: " .. Counter)
-	if Counter == 0 then
+	if (custom_attack == 1) then
+		enemies[1].SetVar('currentdialogue', {
+		"[voice:cirno][func:SetSprite,cirno/annoyed]I'll show you where you can put this!"
+	})
+	elseif Counter == 0 then
 		enemies[1].SetVar('currentdialogue', {
 			"[noskip][voice:cirno]SteamGifts users.",
 			"[noskip][voice:cirno][func:SetSprite,cirno/proud]I heard that some of you were SO smart the last time we did this.",
@@ -163,16 +167,16 @@ function EnemyDialogueEnding()
 		enemies[1].SetVar("def", 999999999)
 	end
 
-	if GetGlobal("DUNKED") == true then
+	if (custom_attack == 1) then
+		nextwaves = {"trashu"}
+		custom_attack = 0
+		return -- Don't increment counter!
+	elseif GetGlobal("DUNKED") == true then
 		nextwaves = {"dunk"}
 	elseif GetGlobal("SPARE") == true then
 		nextwaves = {"nothing"}
 	elseif GetGlobal("FINAL") == true then
 		nextwaves = {"truestrongest"}
-	elseif give_trash == true then
-		enemies[1].SetVar('currentdialogue', {"[voice:cirno][func:SetSprite,cirno/confused]???"})
-		nextwaves = {"trashu"}
-		give_trash = false
 	elseif Counter == 0 then
 		enemies[1].SetVar('comments', {"A wild Cirno appears!"})
 		nextwaves = {"strongest"}
@@ -264,8 +268,8 @@ function HandleItem(ItemID)
 		enemies[1].SetVar('currentdialogue', {
 		"[voice:cirno][func:SetSprite,cirno/annoyed]","ONLY I CAN EAT THEM!"})
 	elseif ItemID == "BUNDLETRASH" then
-		BattleDialog("[noskip][voice:cirno]You offer Cirno some bundle trash you've been hoarding[w:5]\nShe ignores it")
-		give_trash = true
+		BattleDialog("[noskip]You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
+		custom_attack = 1
 	elseif ItemID == "MUSICBOX" then
 		local diceRoll = math.random(6)
 		local pitch = math.random() - 0.5
