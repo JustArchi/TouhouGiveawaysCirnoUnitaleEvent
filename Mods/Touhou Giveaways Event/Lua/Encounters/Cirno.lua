@@ -276,7 +276,6 @@ function HandleItem(ItemID)
 			BattleDialog("[noskip]You broke it for good, it's no use.")
 		else
 			local diceRoll = math.random(7)
-			diceRoll = 7
 			local pitch = math.random() - 0.5
 			if (diceRoll == 1 or diceRoll == 2) then
 				if (diceRoll == 1) then
