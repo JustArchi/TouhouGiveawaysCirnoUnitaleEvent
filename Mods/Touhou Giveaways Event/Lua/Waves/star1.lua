@@ -1,39 +1,35 @@
-bullets = {}
-startTime = Time.time
+Bullet = nil
 Encounter.SetVar("wavetimer", 15.0)
-Starting = true
+SpawnTimer = 0
 function Update()
-	t = Time.time - startTime
-
-
-	if Starting then
+	if (Bullet == nil) then
 		local posx = -60
 		local posy = Arena.height * 1.2
-		local bullet = CreateProjectile('star', posx, posy)
-		bullet.SetVar('velx', (Player.x - posx)/170 - -3)
-		bullet.SetVar('vely', (Player.y - posy)/170 - 1)
-		table.insert(bullets, bullet)
-
-		Starting = false
-	end
-
-	for i=#bullets,1,-1 do
-		local bullet = bullets[i]
-		if (bullet.x < -Arena.width * 2 or bullet.x > Arena.width * 2) or (bullet.y < -Arena.height * 2.5 or bullet.y > Arena.height * 2.5) then
-			bullet.Remove()
-			table.remove(bullets, i)
+		Bullet = CreateProjectile('star', posx, posy)
+		Bullet.SetVar('velx', (Player.x - posx)/170 - -3)
+		Bullet.SetVar('vely', (Player.y - posy)/170 - 1)
+		SpawnTimer = 1
+	elseif (SpawnTimer > 100) then
+		local velx = Bullet.GetVar('velx')
+		local vely = Bullet.GetVar('vely')
+		-- take IT you know you want the sexy donator star you know you do --
+		if (SpawnTimer < 200) then
+			multiplier = 1.5
+			SpawnTimer = SpawnTimer + 1
 		else
-			local velx = bullet.GetVar('velx')
-			local vely = bullet.GetVar('vely')
-			-- take IT you know you want the sexy donator star you know you do --
-			local newvelx = velx/1.1 + (Player.x - bullet.x + math.random(-10, 10))/160
-			local newvely = vely/1.1 + (Player.y - bullet.y + math.random(-10, 10))/160
-			local newposx = bullet.x + velx
-			local newposy = bullet.y + vely
-			bullet.MoveTo(newposx, newposy)
-			bullet.SetVar('vely', newvely)
-			bullet.SetVar('velx', newvelx)
+			multiplier = 1.1
 		end
+
+		local newvelx = velx / multiplier + (Player.x - Bullet.x + math.random(-10, 10))/160
+		local newvely = vely / multiplier + (Player.y - Bullet.y + math.random(-10, 10))/160
+
+		local newposx = Bullet.x + velx
+		local newposy = Bullet.y + vely
+		Bullet.MoveTo(newposx, newposy)
+		Bullet.SetVar('vely', newvely)
+		Bullet.SetVar('velx', newvelx)
+	else
+		SpawnTimer = SpawnTimer + 1
 	end
 end
 

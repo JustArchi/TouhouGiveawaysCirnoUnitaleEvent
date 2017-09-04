@@ -49,6 +49,7 @@ function EncounterStarting()
 	Audio.Stop()
 	State("ENEMYDIALOGUE")
 	--State("ACTIONSELECT")
+	--State("DEFENDING")
 end
 
 function EnteringState(newState, oldState)
@@ -129,7 +130,7 @@ function EnteringState(newState, oldState)
 			SetGlobal("TURN", 15)
 			SetGlobal("SPARE", true)
 		end
-	elseif (newState == "DEFENDING") then
+	elseif (newState != "ENEMYDIALOGUE") and (oldState == "ENEMYDIALOGUE") then
 		if Counter >= 2 then
 			if GetGlobal("SPARE") == true then
 				enemies[1].SetVar('comments', {"Cirno is sparing you."})
