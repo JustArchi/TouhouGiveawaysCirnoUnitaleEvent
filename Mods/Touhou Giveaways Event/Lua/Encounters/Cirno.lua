@@ -20,11 +20,11 @@ autolinebreak = true
 --deathtext = nil
 --deathmusic = nil
 
-SetGlobal("DUNKED", false)
-SetGlobal("FINAL", false)
-SetGlobal("SPARE", false)
-SetGlobal("INSULT", 0)
-SetGlobal("TURN", 0)
+Dunked = false
+Final = false
+Spare = false
+Insult = 0
+Turn = 0
 
 AvailableAttacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
 AvailableItems = {"Snowman", "Pandora's box", "Bundle trash", "Music box", "Check Reqs"}
@@ -39,7 +39,6 @@ CustomAttack = 0
 SnowmanHP = 3
 
 function EncounterStarting()
-	DEBUG("EncounterStarting()")
 	Player.name = "konrads6"
 	Player.lv = 3
 	Player.hp = 28
@@ -53,7 +52,7 @@ function EncounterStarting()
 end
 
 function EnteringState(newState, oldState)
-	DEBUG("EnteringState() " .. oldState .. " -> " .. newState)
+	--DEBUG("EnteringState() " .. oldState .. " -> " .. newState)
 	if newState == "ENEMYDIALOGUE" then
 		if (CustomAttack == 1) then
 			enemies[1].SetVar('currentdialogue', {
@@ -84,19 +83,6 @@ function EnteringState(newState, oldState)
 				"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bump Counter!
 			})
 			Counter = Counter + 1
-		elseif Counter == 2 then
-			enemies[1].SetVar('comments', {
-				"Eye'm the strongest!",
-				"Cirno seems proud of herself.",
-				"Smells like ice.",
-				"Cirno.",
-				"9.",
-				"You'll get no sympathy from her.\n...well, not for now.",
-				"The area is frozen now.\nThat's her attack.",
-				"It's cold in there...",
-				"You can feel ice crawling on\nyour back.",
-				"She seems to think it's a game."
-			})
 		elseif Counter == 4 then
 			enemies[1].SetVar('currentdialogue', {
 				"[noskip][voice:cirno][func:SetSprite,cirno/wink]1st letter is X"
@@ -117,7 +103,7 @@ function EnteringState(newState, oldState)
 			enemies[1].SetVar('currentdialogue', {
 				"[noskip][voice:cirno][func:SetSprite,cirno/wink]Last letter is X"
 			})
-		elseif GetGlobal("TURN") == 14 then
+		elseif Turn == 14 then
 			enemies[1].SetVar('currentdialogue', {
 				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful][func:beaten]Huff... puff...",
 				"[noskip][voice:cirno][func:SetSprite,cirno/proud]Hehehe... [func:SetSprite,cirno/wink]You're not the kind of person that will die easily, right?",
@@ -127,27 +113,27 @@ function EnteringState(newState, oldState)
 				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]...we'll have to convince her, though.",
 				"[noskip][voice:cirno][func:SetSprite,cirno/base]Anyway, why don't you come along?"
 			})
-			SetGlobal("TURN", 15)
-			SetGlobal("SPARE", true)
+			Turn = 15
+			Spare = true
 		end
-	elseif (newState != "ENEMYDIALOGUE") and (oldState == "ENEMYDIALOGUE") then
+	elseif (newState == "DEFENDING") then
 		if Counter >= 2 then
-			if GetGlobal("SPARE") == true then
+			if Spare == true then
 				enemies[1].SetVar('comments', {"Cirno is sparing you."})
-			elseif GetGlobal("TURN") >= 7 then
+			elseif Turn >= 7 then
 				enemies[1].SetVar('comments', {"Looks like she's having fun."})
-			elseif GetGlobal("INSULT") > 0 then
+			elseif Insult > 0 then
 				enemies[1].SetVar('comments', {"Seems like you pissed her off."})
 			end
 		end
 
-		if GetGlobal("INSULT") > 0 then
+		if Insult > 0 then
 			enemies[1].SetVar('currentdialogue', {"[voice:cirno]What are you doing, standing here like a snowman? Get out."})
-		elseif GetGlobal("SPARE") == true then
+		elseif Spare == true then
 			enemies[1].SetVar('currentdialogue', {"[voice:cirno][func:SetSprite,cirno/confused]What are you doing? [func:SetSprite,cirno/happy]C'mere!"})
 			enemies[1].SetVar('commands', {"Check"})
 			enemies[1].Call("SetSprite","cirno/base")
-		elseif GetGlobal("TURN") >= 7 then
+		elseif Turn >= 7 then
 			enemies[1].SetVar('currentdialogue', {"[voice:cirno][func:SetSprite,cirno/happy]Don't be scared, FIGHT me! [func:SetSprite,cirno/wink]I promise i won't hurt you."})
 			enemies[1].Call("SetSprite","cirno/happy")
 		else
@@ -156,15 +142,15 @@ function EnteringState(newState, oldState)
 			end
 		end
 
-		if GetGlobal("TURN") == 8 then
+		if Turn == 8 then
 			enemies[1].SetVar("def", 0)
-		elseif GetGlobal("TURN") == 9 then
+		elseif Turn == 9 then
 			enemies[1].SetVar("def", -50)
-		elseif GetGlobal("TURN") == 10 then
+		elseif Turn == 10 then
 			enemies[1].SetVar("def", -1000)
-		elseif GetGlobal("TURN") == 11 then
+		elseif Turn == 11 then
 			enemies[1].SetVar("def", -50000)
-		elseif GetGlobal("TURN") > 11 then
+		elseif Turn > 11 then
 			enemies[1].SetVar("def", 999999999)
 		end
 
@@ -172,14 +158,13 @@ function EnteringState(newState, oldState)
 			nextwaves = {"trashu"}
 			CustomAttack = 0
 			return -- Don't increment Counter!
-		elseif GetGlobal("DUNKED") == true then
+		elseif Dunked == true then
 			nextwaves = {"dunk"}
-		elseif GetGlobal("SPARE") == true then
+		elseif Spare == true then
 			nextwaves = {"nothing"}
-		elseif GetGlobal("FINAL") == true then
+		elseif Final == true then
 			nextwaves = {"truestrongest"}
 		elseif Counter == 0 then
-			enemies[1].SetVar('comments', {"A wild Cirno appears!"})
 			nextwaves = {"strongest"}
 		elseif Counter == 1 then
 			nextwaves = {"nothing"}
@@ -212,8 +197,10 @@ function EnteringState(newState, oldState)
 		end
 
 		Counter = Counter + 1
-	elseif (newState != "DEFENDING" and oldState == "DEFENDING") then
-		encountertext = RandomEncounterText()
+	elseif (oldState == "DEFENDING") then
+		if (Counter > 1) then
+			encountertext = RandomEncounterText()
+		end
 	end
 end
 
@@ -225,9 +212,9 @@ function UpdateMusicPitch()
 	Audio.Pitch(CurrentPitch)
 end
 
-function LoadMusic(filename)
-	CurrentSong = filename;
-	Audio.LoadFile(filename)
+function LoadMusic(fileName)
+	CurrentSong = fileName;
+	Audio.LoadFile(fileName)
 	StopMusic()
 end
 

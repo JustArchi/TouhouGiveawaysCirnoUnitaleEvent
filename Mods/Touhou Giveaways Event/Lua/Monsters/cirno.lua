@@ -1,5 +1,14 @@
 comments = {
-	"A wild Cirno appears!"
+	"Eye'm the strongest!",
+	"Cirno seems proud of herself.",
+	"Smells like ice.",
+	"Cirno.",
+	"9.",
+	"You'll get no sympathy from her.\n...well, not for now.",
+	"The area is frozen now.\nThat's her attack.",
+	"It's cold in there...",
+	"You can feel ice crawling on\nyour back.",
+	"She seems to think it's a game."
 }
 
 commands = {"Check", "Flatter", "Insult", "Flirt", "Joke", "Question"}
@@ -39,67 +48,67 @@ Insult = false
 
 function HandleAttack(attackstatus)
 	if attackstatus == -1 then
-		if GetGlobal("SPARE") == true then
+		if Encounter.GetVar("Spare") == true then
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/wink]Hey, what are you waiting for?"
 			}
-		elseif GetGlobal("TURN") >= 7 then
+		elseif Encounter.GetVar("Turn") >= 7 then
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/confused]Uh? Why did you hold back?",
 				"[voice:cirno][func:SetSprite,cirno/happy]Come on now!"
 			}
-		elseif GetGlobal("INSULT") == 0 then
+		elseif Encounter.GetVar("Insult") == 0 then
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/confused]Why are you looking at me that way?"
 			}
 
-			SetGlobal("TURN", 7)
+			Encounter.SetVar("Turn", 7)
 		else
 			currentdialogue = {
 				"[voice:cirno]You don't dare to approach?","[voice:cirno]How lame."
 			}
 		end
     else
-		if GetGlobal("TURN") == 7 then
+		if Encounter.GetVar("Turn") == 7 then
 			SetSprite('cirno/proud')
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/proud]HEHEHE! Look at that! NOT A SINGLE SCRATCH! Eye'm the strongest!",
 				"[voice:cirno][func:SetSprite,cirno/wink]Hey, come on! I know you can hit harder! Don't hold back on me!"
 			}
 
-			SetGlobal("TURN", 8)
-		elseif GetGlobal("TURN") == 8 then
+			Encounter.SetVar("Turn", 8)
+		elseif Encounter.GetVar("Turn") == 8 then
 			SetSprite('cirno/proud')
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/wink]Hehe... i knew it! You're the kind of person who is constantly pushing its own limits...",
 				"[voice:cirno][func:SetSprite,cirno/happy]Now, hit even harder! Who cares if you break your knife? It's just a toy after all!"
 			}
 
-			SetGlobal("TURN", 9)
-		elseif GetGlobal("TURN") == 9 then
+			Encounter.SetVar("Turn", 9)
+		elseif Encounter.GetVar("Turn") == 9 then
 			SetSprite('cirno/surprised')
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/happy]Wow! You're really giving your all!",
 				"[voice:cirno][func:SetSprite,cirno/proud]Hehe, of course you are. [func:SetSprite,cirno/wink]You have no choice if you want to stay alive, right?"
 			}
 
-			SetGlobal("TURN", 10)
-		elseif GetGlobal("TURN") == 10 then
+			Encounter.SetVar("Turn", 10)
+		elseif Encounter.GetVar("Turn") == 10 then
 			SetSprite('cirno/happy')
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/happy]YAY! Continue that way, bud!"
 			}
 
-			SetGlobal("TURN", 11)
-		elseif GetGlobal("TURN") == 11 then
+			Encounter.SetVar("Turn", 11)
+		elseif Encounter.GetVar("Turn") == 11 then
 			SetSprite('cirno/happy')
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/proud]Hehehehe...",
 				"[voice:cirno][func:SetSprite,cirno/wink]Not bad. Not bad at all."
 			}
 
-			SetGlobal("TURN", 12)
-		elseif GetGlobal("TURN") == 12 then
+			Encounter.SetVar("Turn", 12)
+		elseif Encounter.GetVar("Turn") == 12 then
 			SetSprite('cirno/surprised')
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/confused]Huh? Your knife is already broken?",
@@ -109,14 +118,14 @@ function HandleAttack(attackstatus)
 				"[voice:cirno][func:SetSprite,cirno/annoyed]...for real, this time."
 			}
 
-			SetGlobal("FINAL", true)
-			SetGlobal("TURN", 13)
-		elseif GetGlobal("SPARE") == true then
+			Encounter.SetVar("Final", true)
+			Encounter.SetVar("Turn", 13)
+		elseif Encounter.GetVar("Spare") == true then
 			currentdialogue = {
 				"[voice:cirno][func:SetSprite,cirno/proud]Hey, man... The fight is over.",
 				"[voice:cirno][func:SetSprite,cirno/wink]And your knife is broken."
 			}
-		elseif GetGlobal("INSULT") == 0 then
+		elseif Encounter.GetVar("Insult") == 0 then
 			SetSprite('cirno/surprised')
 			if FightCount >= 99 then
 				currentdialogue = {
@@ -143,8 +152,9 @@ function HandleAttack(attackstatus)
 	end
 end
 
-function LoadMusic(filename)
-	Audio.LoadFile(filename)
+function LoadMusic(fileName)
+	Encounter.SetVar("CurrentSong", fileName)
+	Audio.LoadFile(fileName)
 	StopMusic()
 end
 
@@ -166,11 +176,11 @@ end
 
 function HandleCustomCommand(command)
 	if command == "CHECK" then
-		if GetGlobal("INSULT") == 0 then
-			if GetGlobal("SPARE") == true then
+		if Encounter.GetVar("Insult") == 0 then
+			if Encounter.GetVar("Spare") == true then
 				BattleDialog("CIRNO 9 ATK 9 DEF [func:SetSprite,cirno/happy]You should come with her now.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/wink]Listen to the check option, for once."}
-			elseif GetGlobal("TURN") >= 7 then
+			elseif Encounter.GetVar("Turn") >= 7 then
 				BattleDialog("CIRNO 9 ATK 9 DEF [func:SetSprite,cirno/annoyed]She must be really bored to play with you like that...")
 				currentdialogue = {"[voice:cirno]OH, YOU, SHUT UP![w:10] What are you even useful for anyway?"}
 			elseif FightCount > 0 then
@@ -185,22 +195,22 @@ function HandleCustomCommand(command)
 			currentdialogue = {"[voice:cirno]No shit Sherlock."}
 		end
     elseif command == "FLATTER" then
-		if GetGlobal("INSULT") > 0 then
+		if Encounter.GetVar("Insult") > 0 then
 			BattleDialog("You try to flatter Cirno. She don't listen to you.")
 			currentdialogue = {"[voice:cirno]You won't get away with this. DIE!"}
 		else
-			if GetGlobal("TURN") == 0 then
+			if Encounter.GetVar("Turn") == 0 then
 				BattleDialog("You tell Cirno you find her patterns deadly.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/happy]Oh, really?", "[voice:cirno][func:SetSprite,cirno/proud]Hehe, of course they are! I'm the strongest fairy after all!"}
-				SetGlobal("TURN", 1)
-			elseif GetGlobal("TURN") == 1 then
+				Encounter.SetVar("Turn", 1)
+			elseif Encounter.GetVar("Turn") == 1 then
 				BattleDialog("You tell Cirno she's the most powerful being you've faced in the whole game.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/happy]HEHEHE YES, THAT'S RIGHT! Eye'm the strongest!"}
-				SetGlobal("TURN", 2)
-			elseif GetGlobal("TURN") == 2 then
+				Encounter.SetVar("Turn", 2)
+			elseif Encounter.GetVar("Turn") == 2 then
 				BattleDialog("You tell Cirno you've seen every timeline, and she's by far the strongest character.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/proud]HEHEHEHEHE...", "[voice:cirno][func:SetSprite,cirno/thoughtful]...i don't get it."}
-				SetGlobal("TURN", 3)
+				Encounter.SetVar("Turn", 3)
 			else
 				BattleDialog("Seems like you've already flattered her enough.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/happy]EYE'M THE STRONGEST!"}
@@ -209,31 +219,31 @@ function HandleCustomCommand(command)
     elseif command == "INSULT" then
 		if Insult == true then
 			BattleDialog("You were about to insult Cirno again, but you realized it was a bad idea.")
-		elseif GetGlobal("TURN") >= 7 then
+		elseif Encounter.GetVar("Turn") >= 7 then
 			BattleDialog("You insult Cirno. But she's too busy FIGHTing to pay attention.")
 		else
-			if GetGlobal("INSULT") == 0 then
+			if Encounter.GetVar("Insult") == 0 then
 				BattleDialog("You tell Cirno she's ugly. She doesn't seem to share your opinion.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/annoyed]Hey! You take that back!"}
-				SetGlobal("INSULT", 1)
-			elseif GetGlobal("INSULT") == 1 then
+				Encounter.SetVar("Insult", 1)
+			elseif Encounter.GetVar("Insult") == 1 then
 				BattleDialog("You tell Cirno she's dumb. Now she seems really angry.")
 				currentdialogue = {"[voice:cirno]Alright you won, PREPARE TO DIE!"}
-				SetGlobal("INSULT", 2)
-			elseif GetGlobal("INSULT") == 2 then
+				Encounter.SetVar("Insult", 2)
+			elseif Encounter.GetVar("Insult") == 2 then
 				BattleDialog("You tell Cirno she's weak. You feel like you've just done a huge mistake.")
 				currentdialogue = {"[voice:cirno]Oh really?",
 				"[noskip][voice:cirno][func:SetSprite,cirno/proud][func:StopMusic]...heh. You really WANT me to kill you, don't you?",
 				"[noskip][voice:cirno]Alright then... [func:SetSprite,cirno/wink]Goodbye!"}
-				SetGlobal("DUNKED", true)
+				Encounter.SetVar("Dunked", true)
 			end
 		end
     elseif command == "FLIRT" then
-		if GetGlobal("TURN") >= 7 then
+		if Encounter.GetVar("Turn") >= 7 then
 			BattleDialog("You try to flirt with Cirno, but it still doesn't work.")
 			currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]I don't understand...",
 			"[voice:cirno][func:SetSprite,cirno/thoughtful]...humans are weird."}
-		elseif GetGlobal("INSULT") == 0 then
+		elseif Encounter.GetVar("Insult") == 0 then
 			BattleDialog("You try to flirt with Cirno, but it doesn't seem to work well.")
 			currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]Eeh, what?"}
 		else
@@ -241,11 +251,11 @@ function HandleCustomCommand(command)
 			currentdialogue = {"[voice:cirno]What are you even talking about?"}
 		end
 	elseif command == "JOKE" then
-		if GetGlobal("TURN") >= 7 then
+		if Encounter.GetVar("Turn") >= 7 then
 			BattleDialog("You tell Cirno a joke extremely easy to get. She get it.")
 			currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful]...wow, do all humans have your sense of humor?",
 			"[voice:cirno][func:SetSprite,cirno/happy]Because it's great!"}
-		elseif GetGlobal("INSULT") == 0 then
+		elseif Encounter.GetVar("Insult") == 0 then
 			BattleDialog("You tell Cirno a joke about ice. She doesn't seem to get it.")
 			currentdialogue = {"[voice:cirno][func:SetSprite,cirno/annoyed]Of course i get it!",
 			"[voice:cirno][func:SetSprite,cirno/thoughtful]...i don't get it."}
@@ -255,40 +265,40 @@ function HandleCustomCommand(command)
 			"[voice:cirno][func:SetSprite,cirno/proud]Hehe, i knew it! [func:SetSprite,cirno/happy]Nobody would seriously say that kind of things to me!",
 			"[voice:cirno][func:SetSprite,cirno/wink]...okay, you have a weird sense of humor, but i forgive you.",
 			"[voice:cirno][func:SetSprite,cirno/base]This time."}
-			SetGlobal("INSULT", 0)
+			Encounter.SetVar("Insult", 0)
 			Insult = true
 		end
 	elseif command == "QUESTION" then
-		if GetGlobal("INSULT") == 0 then
-			if GetGlobal("TURN") < 3 then
+		if Encounter.GetVar("Insult") == 0 then
+			if Encounter.GetVar("Turn") < 3 then
 				BattleDialog("You ask Cirno what she prefer between a giant douche and a turd sandwich.")
 				currentdialogue = {"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful][func:PauseMusic]...", 
 				"[noskip][voice:cirno].[w:4].[w:4].",
 				"[noskip][voice:cirno].[w:10].[w:10].",
 				"[noskip][voice:cirno][func:SetSprite,cirno/base][func:UnpauseMusic]...i don't get it."}
-			elseif GetGlobal("TURN") == 3 then
+			elseif Encounter.GetVar("Turn") == 3 then
 				BattleDialog("You ask Cirno the secret of her power.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]Hum?[w:10] [func:SetSprite,cirno/happy]Oh, but it's simple!",
 				"[voice:cirno][func:SetSprite,cirno/thoughtful]...i don't know."}
-				SetGlobal("TURN", 4)
-			elseif GetGlobal("TURN") == 4 then
+				Encounter.SetVar("Turn", 4)
+			elseif Encounter.GetVar("Turn") == 4 then
 				BattleDialog("You ask Cirno where she came from.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful]Hum...[w:10] I think it's a parallel universe or something... It's called Gensokyo.",
 				"[voice:cirno][func:SetSprite,cirno/base]...you should ask to Yukari, she's the one who brought me here![w:10] [func:SetSprite,cirno/thoughtful]In one of her weird portals...",
 				"[voice:cirno][func:SetSprite,cirno/happy]Hey, you know what? [func:SetSprite,cirno/wink]Maybe after the fight, Yukari will accept to send you to Gensokyo!"}
-				SetGlobal("TURN", 5)
-			elseif GetGlobal("TURN") == 5 then
+				Encounter.SetVar("Turn", 5)
+			elseif Encounter.GetVar("Turn") == 5 then
 				BattleDialog("You ask Cirno who Yukari is.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful]Hum... she's some kind of weird youkai... [func:SetSprite,cirno/base]She's nice, even if she can be scary sometimes.",
 				"[voice:cirno][func:SetSprite,cirno/proud]But of course, she's far from being as strong as me.",
 				"[voice:cirno][func:SetSprite,cirno/base]...i think."}
-				SetGlobal("TURN", 6)
-			elseif GetGlobal("TURN") == 6 then
+				Encounter.SetVar("Turn", 6)
+			elseif Encounter.GetVar("Turn") == 6 then
 				BattleDialog("You ask Cirno why she is still FIGHTing.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/surprised]Eeeeh? Isn't it obvious?",
 				"[voice:cirno][func:SetSprite,cirno/happy]It's fun!",
 				"[voice:cirno][func:SetSprite,cirno/wink]Come on now! FIGHT me, and give all you have!"}
-				SetGlobal("TURN", 7)
+				Encounter.SetVar("Turn", 7)
 			else
 				BattleDialog("You don't have any question to ask her anymore.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]What are you waiting for?",

@@ -34,5 +34,5 @@ function Update()
 end
 
 function OnHit(bullet)
-	Player.Hurt(4 * (GetGlobal("INSULT") + 1))
+	Player.Hurt(4 * (Encounter.GetVar("Insult") + 1))
 end

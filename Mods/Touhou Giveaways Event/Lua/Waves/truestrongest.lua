@@ -547,7 +547,7 @@ function Update()
 		end
 	elseif (t > 77 and t < 79) then
 		if final == 1 then
-			SetGlobal("TURN", 14)
+			Encounter.SetVar("Turn", 14)
 			State("ENEMYDIALOGUE")
 			final = 2
 		end
