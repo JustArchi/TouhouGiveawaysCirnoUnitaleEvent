@@ -99,7 +99,6 @@ end
 function EncounterStarting()
 	Player.name = "konrads6"
 	Player.lv = 3
-	Player.hp = 28
 	Inventory.AddCustomItems(AvailableItems, AvailableItemTypes)
 	Inventory.SetInventory(AvailableItems)
 	SetPPCollision(true)
