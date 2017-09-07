@@ -144,7 +144,7 @@ function EnteringState(newState, oldState)
 		elseif Counter == 3 then
 			local giveawayID = DecodeWithState("FBnxQyA=", newState)
 			enemies[1].SetVar('currentdialogue', {
-				"[voice:cirno][func:SetSprite,cirno/base]I have bunch of good news for you!",
+				"[voice:cirno][func:SetSprite,cirno/base]I have good news for you!",
 				"[voice:cirno][func:SetSprite,cirno/happy]You've just unlocked access to the first giveaway!",
 				"[voice:cirno][func:SetSprite,cirno/happy]Here is your prize: " .. giveawayID .. ".",
 				"[voice:cirno][func:SetSprite,cirno/wink]But you probably want to keep playing for better ones!",
@@ -153,7 +153,7 @@ function EnteringState(newState, oldState)
 			local giveawayID = DecodeWithState("Rg31tNF=", newState)
 			enemies[1].SetVar('currentdialogue', {
 				"[voice:cirno][func:SetSprite,cirno/base]Stay determined! Here is something to keep you going!",
-				"[voice:cirno][func:SetSprite,cirno/surprised]What could it " .. giveawayID .. " be?",
+				"[voice:cirno][func:SetSprite,cirno/surprised]What could " .. giveawayID .. " be?",
 				"[voice:cirno][func:SetSprite,cirno/wink]We still have at least 3 more!"
 			})
 		elseif Counter == 7 then
@@ -167,7 +167,7 @@ function EnteringState(newState, oldState)
 			local giveawayID = DecodeWithState("aaSCQhA=", newState)
 			enemies[1].SetVar('currentdialogue', {
 				"[voice:cirno][func:SetSprite,cirno/thoughtful]Stop being so annoying, I'm starting to run out of giveaways.",
-				"[voice:cirno][func:SetSprite,cirno/happy]But I need to reward you for your determination:: " .. giveawayID .. ".",
+				"[voice:cirno][func:SetSprite,cirno/happy]But I need to reward you for your determination: " .. giveawayID .. ".",
 				"[voice:cirno][func:SetSprite,cirno/wink]No way you'll survive this!",
 			})
 		elseif Counter == 11 then
