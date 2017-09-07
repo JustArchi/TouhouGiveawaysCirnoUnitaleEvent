@@ -152,26 +152,42 @@ function HandleAttack(attackstatus)
 	end
 end
 
+function UpdateMusicPitch()
+	if (Encounter.GetVar("CurrentSong") != nil) then
+		Audio.Pitch(Encounter.GetVar("CurrentPitch"))
+	end
+end
+
 function LoadMusic(fileName)
-	Encounter.SetVar("CurrentSong", fileName)
-	Audio.LoadFile(fileName)
-	StopMusic()
+	if (Encounter.GetVar("CurrentSong") != nil) then
+		Encounter.SetVar("CurrentSong", fileName)
+		Audio.LoadFile(fileName)
+		StopMusic()
+	end
 end
 
 function PauseMusic()
-	Audio.Pause()
+	if (Encounter.GetVar("CurrentSong") != nil) then
+		Audio.Pause()
+	end
 end
 
 function StartMusic()
-	Audio.Play()
+	if (Encounter.GetVar("CurrentSong") != nil) then
+		Audio.Play()
+	end
 end
 
 function StopMusic()
-	Audio.Stop()
+	if (Encounter.GetVar("CurrentSong") != nil) then
+		Audio.Stop()
+	end
 end
 
 function UnpauseMusic()
-	Audio.Unpause()
+	if (Encounter.GetVar("CurrentSong") != nil) then
+		Audio.Unpause()
+	end
 end
 
 function HandleCustomCommand(command)
