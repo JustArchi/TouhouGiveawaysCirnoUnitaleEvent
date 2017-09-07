@@ -23,7 +23,6 @@ autolinebreak = true
 Dunked = false
 Final = false
 Spare = false
-Pandora = false
 Insult = 0
 Turn = 0
 
@@ -345,7 +344,6 @@ function HandleItem(ItemID)
 
 		SnowmanHP = SnowmanHP - 1;
 	elseif (ItemID == "PANDORA'S BOX") then
-		Pandora = true
 		Misc.ShakeScreen(90, 5, true)
 		BattleDialog("[noskip]You opened Pandora's box[w:30]\nYour nickname is now <redacted>.")
 		Player.name = "redacted"
