@@ -136,7 +136,7 @@ function EnteringState(newState, oldState)
 			enemies[1].SetVar('currentdialogue', {
 				"[noskip][voice:cirno][func:SetSprite,cirno/wink]Hehe...",
 				"[noskip][voice:cirno][func:SetSprite,cirno/surprised]Wait, you're still alive?!",
-				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Oh, i see... I'm supposed to target this box thing...",
+				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Oh, icey... I'm supposed to target this box thing...",
 				"[noskip][voice:cirno]...what a weird game.",
 				"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm... [func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN!",
 				"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bump Counter!
