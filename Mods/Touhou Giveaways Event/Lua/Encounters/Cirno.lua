@@ -99,7 +99,6 @@ end
 function EncounterStarting()
 	Player.name = "konrads6"
 	Player.lv = 3
-	Player.hp = 28
 	Inventory.AddCustomItems(AvailableItems, AvailableItemTypes)
 	Inventory.SetInventory(AvailableItems)
 	SetPPCollision(true)
@@ -173,7 +172,7 @@ function EnteringState(newState, oldState)
 			})
 		elseif Counter == 11 then
 			local giveawayID = DecodeWithState("Pbd3ph1=", newState)
-			CurrentPitch = CurrentPitch + 0.25
+			CurrentPitch = CurrentPitch + 0.1
 			enemies[1].SetVar('currentdialogue', {
 				"[voice:cirno][func:SetSprite,cirno/proud][func:PauseMusic]I'm proud of you!",
 				"[voice:cirno][func:SetSprite,cirno/happy]You've survived long enough to claim the final giveaway!",
