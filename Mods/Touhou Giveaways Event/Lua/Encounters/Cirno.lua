@@ -354,20 +354,21 @@ function HandleItem(ItemID)
 		if (CurrentSong == nil) then
 			BattleDialog("[noskip]You broke it for good, it's no use.")
 		else
+			StopMusic()
+
 			local diceRoll = math.random(7)
-			local pitch = math.random() - 0.5
 			if (diceRoll == 1 or diceRoll == 2) then
+				local pitch = math.random() - 0.5
+
 				if (diceRoll == 1) then
 					CurrentPitch = CurrentPitch - pitch
 				else
 					CurrentPitch = CurrentPitch + pitch
 				end
 
-				StopMusic()
 				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
 			elseif (diceRoll == 7) then
 				CurrentSong = nil
-				StopMusic()
 				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30] Congratulations! You broke it.")
 			else
 				local randomSong = CurrentSong
