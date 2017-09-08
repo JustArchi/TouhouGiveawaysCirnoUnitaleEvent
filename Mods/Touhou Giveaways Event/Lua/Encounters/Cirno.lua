@@ -29,7 +29,7 @@ Turn = 0
 AvailableAttacks = {"icicle1", "icicle2", "block1", "block2", "block3", "block4", "bullet1", "bullet2", "bullet3", "laser1", "laser2"}
 AvailableItems = {"Snowman", "Pandora's box", "Bundle trash", "Music box", "Check Reqs"}
 AvailableItemTypes = {0, 0, 0, 3, 3}
-AvailableSongs = {"cirno", "megalovania", "one"}
+AvailableSongs = {"cirno", "megalovania", "one", "sandstorm", "flintstones"}
 
 CurrentPitch = 1
 CurrentSong = music
