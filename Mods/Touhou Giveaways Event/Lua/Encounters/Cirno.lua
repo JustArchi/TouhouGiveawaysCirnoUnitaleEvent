@@ -13,7 +13,7 @@ enemypositions = {
 }
 
 autolinebreak = true
---playerskipdocommand = false
+playerskipdocommand = true
 --unescape = false
 --flee = true
 --revive = false
@@ -118,26 +118,26 @@ function EnteringState(newState, oldState)
 		elseif Counter == 0 then
 
 			enemies[1].SetVar('currentdialogue', {
-				"[noskip][voice:cirno]SteamGifts users.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/proud]I heard that some of you were SO smart the last time we did this.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/wink]Checking the HTML for the link to the gibs instead of fighting.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/base]...but.[w:10] NO ONE IS SMARTER THAN ME!",
-				"[noskip][voice:cirno]Because EYE!",
-				"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic][w:60][next]",
-				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Wait a second, this doesn't sound right...[w:90][next]",
-				"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][w:30][next]",
-				"[noskip][voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic]",
-				"[noskip][voice:cirno]The strongest of ALL the fairies!",
-				"[noskip][voice:cirno][color:ff0000]WILL DEFEAT YOU HERE AND NOW![color:000000]",
-				"[noskip][voice:cirno]Have a taste of my [color:ff0000]Strongest Attack[color:000000]![func:SetSprite,cirno/proud]"
+				"[voice:cirno]SteamGifts users.",
+				"[voice:cirno][func:SetSprite,cirno/proud]I heard that some of you were SO smart the last time we did this.",
+				"[voice:cirno][func:SetSprite,cirno/wink]Checking the HTML for the link to the gibs instead of fighting.",
+				"[voice:cirno][func:SetSprite,cirno/base]...but.[w:10] NO ONE IS SMARTER THAN ME!",
+				"[voice:cirno]Because EYE!",
+				"[voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic][w:60][next]",
+				"[voice:cirno][func:SetSprite,cirno/thoughtful]Wait a second, this doesn't sound right...[w:90][next]",
+				"[voice:cirno][func:SetSprite,cirno/annoyed]Ekhm...[func:LoadMusic,cirno][w:30][next]",
+				"[voice:cirno][func:SetSprite,cirno/happy]Cirno![func:StartMusic]",
+				"[voice:cirno]The strongest of ALL the fairies!",
+				"[voice:cirno][color:ff0000]WILL DEFEAT YOU HERE AND NOW![color:000000]",
+				"[voice:cirno]Have a taste of my [color:ff0000]Strongest Attack[color:000000]![func:SetSprite,cirno/proud]"
 			})
 		elseif Counter == 1 then
 			enemies[1].SetVar('currentdialogue', {
-				"[noskip][voice:cirno][func:SetSprite,cirno/wink]Hehe...",
-				"[noskip][voice:cirno][func:SetSprite,cirno/surprised]Wait, you're still alive?!",
-				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]Oh, icey... I'm supposed to target this box thing...",
-				"[noskip][voice:cirno]...what a weird game.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm... [func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN!",
+				"[voice:cirno][func:SetSprite,cirno/wink]Hehe...",
+				"[voice:cirno][func:SetSprite,cirno/surprised]Wait, you're still alive?!",
+				"[voice:cirno][func:SetSprite,cirno/thoughtful]Oh, icey... I'm supposed to target this box thing...",
+				"[voice:cirno]...what a weird game.",
+				"[voice:cirno][func:SetSprite,cirno/annoyed]...anyway, erm... [func:SetSprite,cirno/happy]EYE'LL TAKE YOU DOWN!",
 				"[func:State,ACTIONSELECT]" -- We're ending dialogue here, don't forget to bump Counter!
 			})
 			Counter = Counter + 1
@@ -182,13 +182,13 @@ function EnteringState(newState, oldState)
 			})
 		elseif Turn == 14 then
 			enemies[1].SetVar('currentdialogue', {
-				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful][func:beaten]Huff... puff...",
-				"[noskip][voice:cirno][func:SetSprite,cirno/proud]Hehehe... [func:SetSprite,cirno/wink]You're not the kind of person that will die easily, right?",
-				"[noskip][voice:cirno][func:SetSprite,cirno/proud]Even my deadliest attack didn't take you down... I'm impressed.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/base]Alright, you won, i guess. I'm too lazy to FIGHT more.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/wink]Hey, since the fight is over... maybe Yukari will accept to send you to Gensokyo? It's a nice place.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful]...we'll have to convince her, though.",
-				"[noskip][voice:cirno][func:SetSprite,cirno/base]Anyway, why don't you come along?"
+				"[voice:cirno][func:SetSprite,cirno/thoughtful][func:beaten]Huff... puff...",
+				"[voice:cirno][func:SetSprite,cirno/proud]Hehehe... [func:SetSprite,cirno/wink]You're not the kind of person that will die easily, right?",
+				"[voice:cirno][func:SetSprite,cirno/proud]Even my deadliest attack didn't take you down... I'm impressed.",
+				"[voice:cirno][func:SetSprite,cirno/base]Alright, you won, i guess. I'm too lazy to FIGHT more.",
+				"[voice:cirno][func:SetSprite,cirno/wink]Hey, since the fight is over... maybe Yukari will accept to send you to Gensokyo? It's a nice place.",
+				"[voice:cirno][func:SetSprite,cirno/thoughtful]...we'll have to convince her, though.",
+				"[voice:cirno][func:SetSprite,cirno/base]Anyway, why don't you come along?"
 			})
 			Turn = 15
 			Spare = true
@@ -344,14 +344,14 @@ function HandleItem(ItemID)
 		SnowmanHP = SnowmanHP - 1;
 	elseif (ItemID == "PANDORA'S BOX") then
 		Misc.ShakeScreen(90, 5, true)
-		BattleDialog("[noskip]You opened Pandora's box[w:30]\nYour nickname is now <redacted>.")
+		BattleDialog("You opened Pandora's box[w:30]\nYour nickname is now <redacted>.")
 		Player.name = "redacted"
 	elseif ItemID == "BUNDLE TRASH" then
-		BattleDialog("[noskip]You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
+		BattleDialog("You offer Cirno some bundle trash you've been hoarding.[w:15]\nShe's not impressed.")
 		CustomAttack = 1
 	elseif ItemID == "MUSIC BOX" then
 		if (CurrentSong == nil) then
-			BattleDialog("[noskip]You broke it for good, it's no use.")
+			BattleDialog("You broke it for good, it's no use.")
 		else
 			StopMusic()
 
@@ -365,10 +365,10 @@ function HandleItem(ItemID)
 					CurrentPitch = CurrentPitch + pitch
 				end
 
-				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
+				BattleDialog("You hit the button in hope that it'll work...[w:30][func:UpdateMusicPitch][func:StartMusic] It malfunctioned!")
 			elseif (diceRoll == 7) then
 				CurrentSong = nil
-				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30] Congratulations! You broke it.")
+				BattleDialog("You hit the button in hope that it'll work...[w:30] Congratulations! You broke it.")
 			else
 				local randomSong = CurrentSong
 
@@ -377,15 +377,15 @@ function HandleItem(ItemID)
 				end
 
 				LoadMusic(randomSong)
-				BattleDialog("[noskip]You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
+				BattleDialog("You hit the button in hope that it'll work...[w:30][func:StartMusic] It did!")
 			end
 		end
 	elseif (ItemID == "CHECK REQS") then
 		if (Player.name == "redacted") and (Insult > 0) then
 			local giveawayID = DecodeSpecialWithState("aMK4P2K=", GetCurrentState())
-			BattleDialog("[noskip]Checking... Please wait![w:90]\nRequirements check passed.\nGiveaway: " .. giveawayID .. ".")
+			BattleDialog("Checking... Please wait![w:90]\nRequirements check passed.\nGiveaway: " .. giveawayID .. ".")
 		else
-			BattleDialog("[noskip]Checking... Please wait![w:90]\nRequirements check failed.\nSorry, rules are secret ;)")
+			BattleDialog("Checking... Please wait![w:90]\nRequirements check failed.\nSorry, rules are secret ;)")
 		end
 	end
 

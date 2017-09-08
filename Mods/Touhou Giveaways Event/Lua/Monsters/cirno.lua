@@ -249,8 +249,8 @@ function HandleCustomCommand(command)
 			elseif Encounter.GetVar("Insult") == 2 then
 				BattleDialog("You tell Cirno she's weak. You feel like you've just done a huge mistake.")
 				currentdialogue = {"[voice:cirno]Oh really?",
-				"[noskip][voice:cirno][func:SetSprite,cirno/proud][func:StopMusic]...heh. You really WANT me to kill you, don't you?",
-				"[noskip][voice:cirno]Alright then... [func:SetSprite,cirno/wink]Goodbye!"}
+				"[voice:cirno][func:SetSprite,cirno/proud][func:StopMusic]...heh. You really WANT me to kill you, don't you?",
+				"[voice:cirno]Alright then... [func:SetSprite,cirno/wink]Goodbye!"}
 				Encounter.SetVar("Dunked", true)
 			end
 		end
@@ -288,10 +288,10 @@ function HandleCustomCommand(command)
 		if Encounter.GetVar("Insult") == 0 then
 			if Encounter.GetVar("Turn") < 3 then
 				BattleDialog("You ask Cirno what she prefer between a giant douche and a turd sandwich.")
-				currentdialogue = {"[noskip][voice:cirno][func:SetSprite,cirno/thoughtful][func:PauseMusic]...", 
-				"[noskip][voice:cirno].[w:4].[w:4].",
-				"[noskip][voice:cirno].[w:10].[w:10].",
-				"[noskip][voice:cirno][func:SetSprite,cirno/base][func:UnpauseMusic]...i don't get it."}
+				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/thoughtful][func:PauseMusic]...", 
+				"[voice:cirno].[w:4].[w:4].",
+				"[voice:cirno].[w:10].[w:10].",
+				"[voice:cirno][func:SetSprite,cirno/base][func:UnpauseMusic]...i don't get it."}
 			elseif Encounter.GetVar("Turn") == 3 then
 				BattleDialog("You ask Cirno the secret of her power.")
 				currentdialogue = {"[voice:cirno][func:SetSprite,cirno/confused]Hum?[w:10] [func:SetSprite,cirno/happy]Oh, but it's simple!",
