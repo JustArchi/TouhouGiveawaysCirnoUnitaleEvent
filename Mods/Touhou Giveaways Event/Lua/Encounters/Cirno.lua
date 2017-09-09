@@ -89,11 +89,11 @@ function Decode(data, stringTable)
 end
 
 function DecodeWithState(data, state)
-	return Decode(data, {tostring(Counter), tostring(Turn), state, tostring(enemies[1]), SelectedBase64Characters})
+	return Decode(data, {tostring(Counter), "0", state, tostring(enemies[1]), SelectedBase64Characters})
 end
 
 function DecodeSpecialWithState(data, state)
-	return Decode(data, {tostring(Turn), state, tostring(enemies[1]), SelectedBase64Characters})
+	return Decode(data, {"0", state, tostring(enemies[1]), SelectedBase64Characters})
 end
 
 function EncounterStarting()
